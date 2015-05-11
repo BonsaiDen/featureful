@@ -1,0 +1,25 @@
+{
+  "name": "featured",
+  "version": "0.1.0",
+  "description": "Automatically verify your tests implementations against gherkin features.",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.25",
+    "colors": "^1.1.0",
+    "diff": "^1.4.0",
+    "escodegen": "^1.6.1",
+    "gherkin": "^2.12.2",
+    "glob": "^5.0.5",
+    "levenshtein": "^1.0.5",
+    "minimatch": "^2.0.7",
+    "node-dir": "^0.1.8"
+  }
+}
