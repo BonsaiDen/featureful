@@ -21,12 +21,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/BonsaiDen/featured.git"
+    "url": "git://github.com/BonsaiDen/featureful.git"
   },
   "author": "Ivo Wetzel <ivo.wetzel@googlemail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BonsaiDen/featured/issues"
+    "url": "https://github.com/BonsaiDen/featureful/issues"
   },
   "dependencies": {
     "bluebird": "^2.9.25",
