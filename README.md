@@ -1,5 +1,5 @@
-featured
---------
+featureful
+----------
 
 Automatically verify your tests implementations against cucumber feature specs.
 
@@ -38,8 +38,8 @@ Automatically verify your tests implementations against cucumber feature specs.
 ## Command Line Feature File Parser
 
 ```
-$ npm install -g @bonsaiden/featured
-$ featured some.feature
+$ npm install -g featureful
+$ featureful some.feature
 ```
 
 ## TODO

@@ -1,5 +1,5 @@
 {
-  "name": "@bonsaiden/featured",
+  "name": "featureful",
   "version": "0.1.0",
   "description": "Automatically verify your tests implementations against cucumber feature specs.",
   "keywords": [
@@ -11,7 +11,7 @@
     "mocha"
   ],
   "main": "index.js",
-  "bin": "./bin/featured",
+  "bin": "./bin/featureful",
   "files": [
     "bin",
     "lib",
