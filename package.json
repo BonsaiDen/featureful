@@ -1,16 +1,33 @@
 {
-  "name": "featured",
+  "name": "@bonsaiden/featured",
   "version": "0.1.0",
-  "description": "Automatically verify your tests implementations against gherkin features.",
+  "description": "Automatically verify your tests implementations against cucumber feature specs.",
+  "keywords": [
+    "cucumber",
+    "gherkin",
+    "tests",
+    "features",
+    "specifications",
+    "mocha"
+  ],
   "main": "index.js",
-  "directories": {
-    "example": "example"
+  "bin": "./bin/featured",
+  "files": [
+    "bin",
+    "lib",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BonsaiDen/featured.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "Ivo Wetzel <ivo.wetzel@googlemail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BonsaiDen/featured/issues"
+  },
   "dependencies": {
     "bluebird": "^2.9.25",
     "colors": "^1.1.0",

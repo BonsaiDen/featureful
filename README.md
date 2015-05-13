@@ -1,15 +1,55 @@
 featured
 --------
 
-Automatically verify your tests implementations against gherkin features.
+Automatically verify your tests implementations against cucumber feature specs.
 
+
+## Grunt Task
+
+```javascript
+
+    grunt.initConfig({
+
+        featured: {
+
+            ui: {
+                options: {
+
+                    features: {
+                        pattern: process.cwd() + '/feature/**/*.feature',
+                    },
+
+                    tests: {
+                        pattern: process.cwd() + '/test/**/*.test.js',
+                    },
+
+                    framework: 'mocha'
+
+                }
+            }
+
+        }
+
+    });
+
+    grunt.loadNpmTasks('@bonsaiden/featured');
+```
+
+## Command Line Feature File Parser
+
+```
+$ npm install -g @bonsaiden/featured
+$ featured some.feature
+```
 
 ## TODO
 
-- Command Line API
 - Index Comparisons 
-- Keyword specifications for languages other than English
+- Keyword specifications for languages other than English and German
 - Support for other Frameworks and Languages
+
+    - JUnit
+    - OCUnit
 
 
 ## Licensed under MIT

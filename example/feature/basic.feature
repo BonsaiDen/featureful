@@ -1,7 +1,12 @@
 Feature: Basic
 
-    Scenario: Foo
-        Given a
-        When b
-        Then c
+    Scenario Outline: Handling the weather
+        Given <weather> weather
+        When <something> 
+        Then <action>
+
+        Examples:
+            | weather | something      | action        |
+            |  sunny  | the sun shines | enjoy the day |
+            |  rainy  | it rains       | take cover    |
 

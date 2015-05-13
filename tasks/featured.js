@@ -19,9 +19,16 @@ module.exports = function(grunt) {
         var parser = new Parser(options);
         parser.matchSpecs().then(function(specs) {
 
+            grunt.log.ok('Comparing Test and Features...');
+
             var validator = new Validator(options);
-            validator.compare(specs);
-            done();
+            if (!validator.compare(specs)) {
+                done(new Error('Test and Features do not match!'));
+
+            } else {
+                grunt.log.ok('Tests and Features are up to date.');
+                done();
+            }
 
         }, function(err) {
             grunt.fail.fatal(err);
