@@ -22,4 +22,7 @@ Feature: Login
 
     Scenario: A user tries to login with invalid credentials
 
+
+    Scenario: Another one
+
 Feature: Other

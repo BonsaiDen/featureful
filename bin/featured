@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+// Dependencies ---------------------------------------------------------------
+// ----------------------------------------------------------------------------
+var Parser = require('../lib/Parser');
+
+if (process.argv.length != 3) {
+    process.stdout.write('Usage: featured [featureFile]\n\n  --help     Displays help text.\n\n');
+
+} else {
+    Parser.parseAST(process.argv[2]);
+}
+
