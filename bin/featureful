@@ -2,12 +2,50 @@
 
 // Dependencies ---------------------------------------------------------------
 // ----------------------------------------------------------------------------
-var Parser = require('../lib/Parser');
+var path = require('path'),
+    Parser = require('../lib/Parser'),
+    Validator = require('../lib/Validator');
 
-if (process.argv.length != 3) {
-    process.stdout.write('Usage: featured [featureFile]\n\n  --help     Displays help text.\n\n');
+
+// Command Line API -----------------------------------------------------------
+// ----------------------------------------------------------------------------
+if (process.argv.length < 3) {
+    process.stdout.write('Usage: featureful pattern [pattern...]\n\n  --help     Displays help text.\n\n');
+    process.exit(0);
 
 } else {
-    Parser.parseAST(process.argv[2]);
+    
+    // Verification of Tests against Features
+    if (process.argv[2].match(/\.js$/)) {
+
+        var options = require(path.join(process.cwd(), process.argv[2])),
+            parser = new Parser(options);
+
+        parser.matchSpecs().then(function(specs) {
+
+            var validator = new Validator(options);
+            if (!validator.compare(specs)) {
+                process.exit(1);
+            }
+
+        }, function(err) {
+            process.stderr.write(err.toString() + '\n');
+            process.exit(1);
+        });
+
+    // AST generation from feature files
+    } else {
+
+        try {
+            var files = Parser.parseFeatureFromPatterns(process.argv.slice(2));
+            process.stdout.write(JSON.stringify(files, '', 2));
+            
+        } catch(err) {
+            process.stderr.write(err.toString() + '\n');
+            process.exit(1);
+        }
+        
+    }
+
 }
 
