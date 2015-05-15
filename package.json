@@ -1,6 +1,6 @@
 {
   "name": "featureful",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Automatically verify your tests implementations against cucumber feature specs.",
   "keywords": [
     "cucumber",
@@ -15,6 +15,7 @@
   "files": [
     "bin",
     "lib",
+    "tasks",
     "index.js",
     "LICENSE",
     "README.md"
