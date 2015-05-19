@@ -10,7 +10,7 @@ var Parser = require('../lib/Parser'),
 module.exports = function(grunt) {
 
     // Task Definition --------------------------------------------------------
-    grunt.registerMultiTask('featured', 'Test', function() {
+    grunt.registerMultiTask('featureful', 'Test', function() {
 
         // Make this an async grunt task
         var done = this.async(),
