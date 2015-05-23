@@ -33,7 +33,6 @@
     "bluebird": "^2.9.25",
     "colors": "^1.1.0",
     "diff": "^1.4.0",
-    "escodegen": "^1.6.1",
     "gherkin": "^2.12.2",
     "glob": "^5.0.5",
     "minimatch": "^2.0.7",
