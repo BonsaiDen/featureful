@@ -1,6 +1,6 @@
 {
   "name": "featureful",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Automatically verify your tests implementations against cucumber feature specs.",
   "keywords": [
     "cucumber",
@@ -36,7 +36,6 @@
     "escodegen": "^1.6.1",
     "gherkin": "^2.12.2",
     "glob": "^5.0.5",
-    "levenshtein": "^1.0.5",
     "minimatch": "^2.0.7",
     "node-dir": "^0.1.8",
     "recast": "^0.10.12"
