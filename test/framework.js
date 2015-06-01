@@ -2,6 +2,7 @@
 // ----------------------------------------------------------------------------
 var path = require('path'),
     Parser = require('..').Parser,
+    Validator = require('../lib/Validator'),
     featureParser = require('../lib/feature');
 
 require('should');
@@ -42,6 +43,39 @@ global.framework = {
         framework.parse(dir).matchSpecs().then(function(specs) {
             try {
                 callback(specs);
+                done();
+
+            } catch(err) {
+                done(err);
+            }
+
+        }, done);
+
+    },
+
+    validate: function(dir, id, callback, done, options) {
+
+        var parser = new Parser({
+
+            features: {
+                pattern: dir + '/features/' + id + '.feature',
+            },
+
+            tests: {
+                pattern: dir + '/tests/' + id + '.test.js',
+            },
+
+            framework: 'mocha'
+
+        });
+
+        parser.matchSpecs().then(function(specs) {
+
+            var validator = new Validator(options),
+                error = validator.compare(specs);
+
+            try {
+                callback(error);
                 done();
 
             } catch(err) {

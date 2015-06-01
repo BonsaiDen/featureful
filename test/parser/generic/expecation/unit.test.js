@@ -1,6 +1,6 @@
 describe('Expectation Parsing', function() {
 
-    it('should parse Scenarios from both Features and Tests', function(done) {
+    it('should parse Expectations from both Features and Tests', function(done) {
 
         framework.match(__dirname, function(specs) {
 
