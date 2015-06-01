@@ -21,8 +21,11 @@ module.exports = function(grunt) {
 
             grunt.log.ok('Comparing Test and Features...');
 
-            var validator = new Validator(options);
-            if (!validator.compare(specs)) {
+            var validator = new Validator(options),
+                error = validator.compare(specs);
+
+            if (error) {
+                console.log(error);
                 done(new Error('Test and Features do not match!'));
 
             } else {
