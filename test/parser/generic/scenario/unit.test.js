@@ -24,7 +24,7 @@ describe('Scenario Parsing', function() {
                 line: 6
             });
 
-            featureScenarios[0].getTags().should.be.eql(['@tagOne', '@tagTwo']);
+            featureScenarios[0].getTags().should.be.eql(['tagOne', 'tagTwo']);
             featureScenarios[1].getTags().should.be.eql([]);
 
             // Check Test Scenarios
@@ -44,7 +44,7 @@ describe('Scenario Parsing', function() {
                 line: 8
             });
 
-            testScenarios[0].getTags().should.be.eql(['@tagOne', '@tagTwo']);
+            testScenarios[0].getTags().should.be.eql(['tagOne', 'tagTwo']);
             testScenarios[1].getTags().should.be.eql([]);
 
         }, done);

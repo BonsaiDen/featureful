@@ -9,20 +9,22 @@ describe('Feature Parsing', function() {
 
             // Check Feature
             feature.getTitle().should.be.exactly('A Feature');
+            feature.getTags().should.be.eql(['tagOne', 'tagTwo']);
             feature.getDescription().should.be.exactly('A\nDescription\nthat\nshould be\nhere.');
             feature.getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
                 col: 0,
-                line: 1
+                line: 2
             });
 
             // Check Test
             test.getTitle().should.be.exactly('A Feature');
+            test.getTags().should.be.eql(['tagOne', 'tagTwo']);
             test.getDescription().should.be.exactly('A\nDescription\nthat\nshould be\nhere.');
             test.getLocation().should.be.eql({
                 filename: __dirname + '/tests/a.test.js',
                 col: 0,
-                line: 1
+                line: 2
             });
 
         }, done);

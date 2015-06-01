@@ -1,3 +1,4 @@
+@tagOne @tagTwo
 Feature: A Feature
     A
     Description

@@ -27,8 +27,8 @@ describe('Scenario Parsing', function() {
             });
 
             // Check Feature Scenario Tags
-            featureScenarios[0].getTags().should.be.eql(['@tagOne', '@tagTwo']);
-            featureScenarios[1].getTags().should.be.eql(['@tagOne', '@tagTwo']);
+            featureScenarios[0].getTags().should.be.eql(['tagOne', 'tagTwo']);
+            featureScenarios[1].getTags().should.be.eql(['tagOne', 'tagTwo']);
 
             // Check Features Scenario Expectations
             featureScenarios[0].getExpectations().length.should.be.exactly(3);
