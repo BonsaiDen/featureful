@@ -11,21 +11,21 @@ require('should');
 // Test Framework -------------------------------------------------------------
 global.framework = {
 
-    parse: function(dir) {
+    parse: function(dir, options) {
 
-        return new Parser({
+        options = options || {};
 
-            features: {
-                pattern: dir + '/features/**/*.feature',
-            },
+        options.features = {
+            pattern: dir + '/features/**/*.feature',
+        };
 
-            tests: {
-                pattern: dir + '/tests/**/*.test.js',
-            },
+        options.tests = {
+            pattern: dir + '/tests/**/*.test.js',
+        };
 
-            framework: 'mocha'
+        options.framework = 'mocha';
 
-        });
+        return new Parser(options);
 
     },
 
@@ -38,9 +38,9 @@ global.framework = {
         return new Framework().parse(filename, prefix);
     },
 
-    match: function(dir, callback, done) {
+    match: function(dir, callback, done, options) {
 
-        framework.parse(dir).matchSpecs().then(function(specs) {
+        framework.parse(dir, options).matchSpecs().then(function(specs) {
             try {
                 callback(specs);
                 done();
