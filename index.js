@@ -1,5 +1,5 @@
 module.exports = {
-    Parser: require('./lib/Parser'),
-    Validator: require('./lib/Validator')
+    Parser: require('./lib/spec/Parser'),
+    Validator: require('./lib/validator/Validator')
 };
 

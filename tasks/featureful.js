@@ -3,7 +3,7 @@
 // Dependencies ---------------------------------------------------------------
 // ----------------------------------------------------------------------------
 var Parser = require('../lib/Parser'),
-    Validator = require('../lib/Validator');
+    Validator = require('../lib/validator/Validator');
 
 
 // Grunt Tasks Definition -----------------------------------------------------
@@ -12,7 +12,6 @@ module.exports = function(grunt) {
     // Task Definition --------------------------------------------------------
     grunt.registerMultiTask('featureful', 'Test', function() {
 
-        // Make this an async grunt task
         var done = this.async(),
             options = this.options();
 
