@@ -1,5 +1,5 @@
 @tagOne @tagTwo
-Feature: A Feature Title
+Feature: A Feature Description
     A
     Description
     that

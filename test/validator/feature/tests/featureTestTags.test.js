@@ -1,5 +1,5 @@
-// ### @tagOne @tagTwo
-describe('A Feature', function() {
+// ### @tagOne @tagMismatch
+describe('A Feature with Tags', function() {
     /*
      A
      Description

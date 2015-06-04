@@ -1,10 +1,10 @@
 // ### @tagOne @tagTwo
-describe('A Feature', function() {
+describe('A Feature Description', function() {
     /*
      A
      Description
      that
-     should be
+     does not match
      here.
      */
 });
