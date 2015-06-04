@@ -12,7 +12,7 @@ describe('A Feature', function() {
         1 + 2;
 
         // ### And when some other thing is done
-        // No Expression
+
 
         // ### Then something happens
         1 + 2;

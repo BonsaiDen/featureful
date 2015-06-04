@@ -10,13 +10,21 @@ describe('Expectation Parsing', function() {
             // Check Feature Expectations
             featureExpectations.length.should.be.exactly(6);
 
-            // Check Features Expectation Titles
+            // Check Feature Expectation Titles
             featureExpectations[0].getTitle().should.be.exactly('Given some condition');
             featureExpectations[1].getTitle().should.be.exactly('And given another condition');
             featureExpectations[2].getTitle().should.be.exactly('When something is done');
             featureExpectations[3].getTitle().should.be.exactly('And when some other thing is done');
             featureExpectations[4].getTitle().should.be.exactly('Then something happens');
             featureExpectations[5].getTitle().should.be.exactly('And then some other thing happens');
+
+            // Check Feature Expectation Indexes
+            featureExpectations[0].getIndex().should.be.exactly(0);
+            featureExpectations[1].getIndex().should.be.exactly(1);
+            featureExpectations[2].getIndex().should.be.exactly(2);
+            featureExpectations[3].getIndex().should.be.exactly(3);
+            featureExpectations[4].getIndex().should.be.exactly(4);
+            featureExpectations[5].getIndex().should.be.exactly(5);
 
             // Check Feature Expectation Locations
             featureExpectations[0].getLocation().should.be.eql({
@@ -49,6 +57,14 @@ describe('Expectation Parsing', function() {
             testExpectations[3].hasExpression().should.be.exactly(false);
             testExpectations[4].hasExpression().should.be.exactly(true);
             testExpectations[5].hasExpression().should.be.exactly(false);
+
+            // Check Test Expectation Indexes
+            testExpectations[0].getIndex().should.be.exactly(0);
+            testExpectations[1].getIndex().should.be.exactly(1);
+            testExpectations[2].getIndex().should.be.exactly(2);
+            testExpectations[3].getIndex().should.be.exactly(3);
+            testExpectations[4].getIndex().should.be.exactly(4);
+            testExpectations[5].getIndex().should.be.exactly(5);
 
             // Check Test Expectation Locations
             testExpectations[0].getLocation().should.be.eql({
