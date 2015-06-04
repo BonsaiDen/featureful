@@ -2,8 +2,12 @@
 // ----------------------------------------------------------------------------
 var path = require('path'),
     Parser = require('..').Parser,
-    Validator = require('../lib/Validator'),
-    featureParser = require('../lib/feature');
+    Validator = require('../lib/validator/Validator'),
+    featureParser = require('../lib/feature'),
+    util = require('../lib/util');
+
+// Disable colors in tests
+util._noColor = true;
 
 require('should');
 
@@ -30,7 +34,12 @@ global.framework = {
     },
 
     parseFeature: function(filename) {
-        return featureParser(filename, true);
+        try {
+            return featureParser(filename, true);
+
+        } catch(err) {
+            return err;
+        }
     },
 
     parseTest: function(framework, filename, prefix) {
@@ -65,7 +74,11 @@ global.framework = {
                 pattern: dir + '/tests/' + id + '.test.js',
             },
 
-            framework: 'mocha'
+            framework: 'mocha',
+
+            matcher: {
+                type: 'path'
+            }
 
         });
 
