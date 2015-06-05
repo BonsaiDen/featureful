@@ -84,7 +84,7 @@ global.framework = {
 
         parser.matchSpecs().then(function(specs) {
 
-            var validator = new Validator(options),
+            var validator = new Validator(),
                 error = validator.compare(specs);
 
             try {
