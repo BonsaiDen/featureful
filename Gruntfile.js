@@ -10,6 +10,13 @@ module.exports = function(grunt) {
         // Configuration ------------------------------------------------------
         pkg: grunt.file.readJSON('package.json'),
 
+        // Environment --------------------------------------------------------
+        env: {
+            test: {
+                NO_COLOR: false
+            }
+        },
+
         // Tests --------------------------------------------------------------
         mochaTest: {
 
@@ -38,7 +45,7 @@ module.exports = function(grunt) {
                         './test/framework'
                     ],
                     root: './lib',
-                    reportFormats: ['text-summary', 'html']
+                    reportFormats: ['text-summary', 'html', 'lcovonly']
                 }
             }
         },
@@ -65,11 +72,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-env');
 
 
     // Public Tasks -----------------------------------------------------------
-    grunt.registerTask('test', ['mochaTest:test']);
-    grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
+    grunt.registerTask('test', ['env:test', 'mochaTest:test']);
+    grunt.registerTask('coverage', ['env:test', 'mocha_istanbul:coverage']);
     grunt.registerTask('default', ['jshint']);
 
 };
