@@ -64,27 +64,25 @@ global.framework = {
 
     validate: function(dir, id, callback, done, options) {
 
-        var parser = new Parser({
+        options = options || {};
 
-            features: {
-                pattern: dir + '/features/' + id + '.feature',
-            },
+        options.features = {
+            pattern: dir + '/features/' + id + '.feature'
+        };
 
-            tests: {
-                pattern: dir + '/tests/' + id + '.test.js',
-            },
+        options.tests = {
+            pattern: dir + '/tests/' + id + '.test.js'
+        };
 
-            framework: 'mocha',
+        options.framework = options.framework || 'mocha';
 
-            matcher: {
-                type: 'path'
-            }
+        options.matcher = options.matcher || {
+            type: 'path'
+        };
 
-        });
+        new Parser(options).matchSpecs().then(function(specs) {
 
-        parser.matchSpecs().then(function(specs) {
-
-            var validator = new Validator(),
+            var validator = new Validator(options),
                 error = validator.compare(specs);
 
             try {

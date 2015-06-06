@@ -27,7 +27,7 @@ if (process.argv.length < 3) {
                 error = validator.compare(specs);
 
             if (error) {
-                process.stderr.write(error);
+                process.stderr.write(error.format());
                 process.exit(1);
             }
 

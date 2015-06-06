@@ -37,15 +37,32 @@ describe('Scenario Validation', function() {
             result.getFeature('A Feature').getScenario('A Scenario without Test').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'No test for Scenario:',
-                expected: 'should be implemented in {{testLocation}}',
+                actual: 'A Scenario without Test',
+                expected: 'should be implemented under existing parent test.',
                 from: {
                     filename: root + '/test/validator/scenario/features/scenarioWithoutTest.feature',
                     line: 3,
                     col: 4
+                },
+                location: {
+                    filename: root + '/test/validator/scenario/tests/scenarioWithoutTest.test.js',
+                    line: 1,
+                    col: 0
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario without Test').format().split(/\n/).should.be.eql([
+                "- No test for Scenario:",
+                "",
+                "      \"A Scenario without Test\"",
+                "",
+                "  at " + root + "/test/validator/scenario/features/scenarioWithoutTest.feature (line 3, column 4)",
+                "",
+                "  should be implemented under existing parent test.",
+                "",
+                "  in " + root + "/test/validator/scenario/tests/scenarioWithoutTest.test.js (line 1, column 0)"
+            ]);
 
         }, done);
 
@@ -77,15 +94,32 @@ describe('Scenario Validation', function() {
             result.getFeature('A Feature').getScenario('A Scenario without Feature').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'No specification for Scenario:',
-                expected: 'should be specified in {{featureLocation}}',
+                actual: 'A Scenario without Feature',
+                expected: 'should be specified under existing parent feature.',
                 from: {
                     filename: root + '/test/validator/scenario/tests/testWithoutScenario.test.js',
                     line: 3,
                     col: 4
+                },
+                location: {
+                    col: 0,
+                    filename: root + '/test/validator/scenario/features/testWithoutScenario.feature',
+                    line: 1
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario without Feature').format().split(/\n/).should.be.eql([
+                "- No specification for Scenario:",
+                "",
+                "      \"A Scenario without Feature\"",
+                "",
+                "  at " + root + "/test/validator/scenario/tests/testWithoutScenario.test.js (line 3, column 4)",
+                "",
+                "  should be specified under existing parent feature.",
+                "",
+                "  in " + root + "/test/validator/scenario/features/testWithoutScenario.feature (line 1, column 0)"
+            ]);
 
         }, done);
 
@@ -120,18 +154,31 @@ describe('Scenario Validation', function() {
                 expected: 'A Scenario Title',
                 actual: 'A Scenario Title mismatch',
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/scenario/features/scenarioTestTitle.feature',
+                    filename: root + '/test/validator/scenario/features/scenarioTestTitle.feature',
                     line: 4,
                     col: 4
                 },
                 location: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/scenario/tests/scenarioTestTitle.test.js',
+                    filename: root + '/test/validator/scenario/tests/scenarioTestTitle.test.js',
                     line: 4,
                     col: 4
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario Title').format().split(/\n/).should.be.eql([
+                "- Incorrect Scenario title in test:",
+                "",
+                "      \"A Scenario Title mismatch\"",
+                "",
+                "  at " + root + "/test/validator/scenario/tests/scenarioTestTitle.test.js (line 4, column 4)",
+                "",
+                "  does not match the title from the feature file:",
+                "",
+                "      \"A Scenario Title\"",
+                "",
+                "  in " + root + "/test/validator/scenario/features/scenarioTestTitle.feature (line 4, column 4)"
+            ]);
 
         }, done);
 
@@ -166,26 +213,37 @@ describe('Scenario Validation', function() {
                 expected: ['tagOne', 'tagTwo'],
                 actual: ['tagOne', 'tagMismatch'],
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/scenario/features/scenarioTestTags.feature',
+                    filename: root + '/test/validator/scenario/features/scenarioTestTags.feature',
                     line: 4,
                     col: 4
                 },
                 location: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/scenario/tests/scenarioTestTags.test.js',
+                    filename: root + '/test/validator/scenario/tests/scenarioTestTags.test.js',
                     line: 4,
                     col: 4
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario with Tags').format().split(/\n/).should.be.eql([
+                "- Incorrect Scenario tags in test:",
+                "",
+                "      @tagOne @tagTwotagMismatch",
+                "",
+                "  at " + root + "/test/validator/scenario/tests/scenarioTestTags.test.js (line 4, column 4)",
+                "",
+                "  does not match the tags from the feature file:",
+                "",
+                "      @tagOne @tagTwo",
+                "",
+                "  in " + root + "/test/validator/scenario/features/scenarioTestTags.feature (line 4, column 4)"
+            ]);
 
         }, done);
 
     });
 
     // TODO index checks ?
-
-    // TODO validate scenarios from multiple test files for the same feature against the scenarios described in a single feature file
 
     // TODO error out on duplicated scenario name in one feature
 

@@ -1,5 +1,7 @@
 describe('Expectation Validation', function() {
 
+    var root = process.cwd();
+
     it('should validate matching Expectations from Features and Tests', function(done) {
 
         framework.validate(__dirname, 'a', function(result) {
@@ -47,21 +49,38 @@ describe('Expectation Validation', function() {
             result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given something').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'Test implementation is missing for Expectation:',
-                expected: 'should be implemented in {{testLocation}}',
+                actual: 'Given something',
+                expected: 'should be implemented under existing parent test.',
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/features/expectationWithoutTest.feature',
+                    filename: root + '/test/validator/expectation/features/expectationWithoutTest.feature',
                     line: 4,
                     col: 8
+                },
+                location: {
+                    filename: root + '/test/validator/expectation/tests/expectationWithoutTest.test.js',
+                    line: 3,
+                    col: 4
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given something').format().split(/\n/).should.be.eql([
+                "- Test implementation is missing for Expectation:",
+                "",
+                "      \"Given something\"",
+                "",
+                "  at " + root + "/test/validator/expectation/features/expectationWithoutTest.feature (line 4, column 8)",
+                "",
+                "  should be implemented under existing parent test.",
+                "",
+                "  in " + root + "/test/validator/expectation/tests/expectationWithoutTest.test.js (line 3, column 4)"
+            ]);
 
         }, done);
 
     });
 
-    it('should report missing Expectation descriptions for Tests implementations', function(done) {
+    it('should report missing Expectation descriptions for Test implementations', function(done) {
 
         framework.validate(__dirname, 'expectationWithoutFeature', function(result) {
 
@@ -102,15 +121,32 @@ describe('Expectation Validation', function() {
             result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given something').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'Feature specification is missing for Expectation:',
-                expected: 'should be specified in {{featureLocation}}',
+                actual: 'Given something',
+                expected: 'should be specified under existing parent feature.',
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/tests/expectationWithoutFeature.test.js',
+                    filename: root + '/test/validator/expectation/tests/expectationWithoutFeature.test.js',
                     line: 5,
                     col: 8
+                },
+                location: {
+                    filename: root + '/test/validator/expectation/features/expectationWithoutFeature.feature',
+                    line: 3,
+                    col: 4
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given something').format().split(/\n/).should.be.eql([
+                "- Feature specification is missing for Expectation:",
+                "",
+                "      \"Given something\"",
+                "",
+                "  at " + root + "/test/validator/expectation/tests/expectationWithoutFeature.test.js (line 5, column 8)",
+                "",
+                "  should be specified under existing parent feature.",
+                "",
+                "  in " + root + "/test/validator/expectation/features/expectationWithoutFeature.feature (line 3, column 4)"
+            ]);
 
         }, done);
 
@@ -157,18 +193,31 @@ describe('Expectation Validation', function() {
                 expected: 'Given something',
                 actual: 'Given something else',
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/features/expectationTitle.feature',
+                    filename: root + '/test/validator/expectation/features/expectationTitle.feature',
                     line: 4,
                     col: 8
                 },
                 location: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/tests/expectationTitle.test.js',
+                    filename: root + '/test/validator/expectation/tests/expectationTitle.test.js',
                     line: 5,
                     col: 8
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given something').format().split(/\n/).should.be.eql([
+                "- Incorrect Expectation title in test:",
+                "",
+                "      \"Given something else\"",
+                "",
+                "  at " + root + "/test/validator/expectation/tests/expectationTitle.test.js (line 5, column 8)",
+                "",
+                "  does not match the title from the feature file:",
+                "",
+                "      \"Given something\"",
+                "",
+                "  in " + root + "/test/validator/expectation/features/expectationTitle.feature (line 4, column 8)"
+            ]);
 
         }, done);
 
@@ -210,21 +259,29 @@ describe('Expectation Validation', function() {
 
             // Check actual Error
             result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given missing code').getErrors().should.be.eql([{
-                type: 'missing',
-                message: 'Missing code for Expectation in test:',
+                type: 'expression',
+                message: 'Missing code expression for Expectation in test:',
+                actual: 'Given missing code',
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/features/missingCode.feature',
+                    filename: root + '/test/validator/expectation/features/missingCode.feature',
                     line: 4,
                     col: 8
                 },
                 location: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/tests/missingCode.test.js',
+                    filename: root + '/test/validator/expectation/tests/missingCode.test.js',
                     line: 5,
                     col: 8
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given missing code').format().split(/\n/).should.be.eql([
+                "- Missing code expression for Expectation in test:",
+                "",
+                "      \"Given missing code\"",
+                "",
+                "  at " + root + "/test/validator/expectation/tests/missingCode.test.js (line 5, column 8)"
+            ]);
 
         }, done);
 
@@ -269,12 +326,12 @@ describe('Expectation Validation', function() {
                 expected: 2,
                 actual: 3,
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/features/expectationIndex.feature',
+                    filename: root + '/test/validator/expectation/features/expectationIndex.feature',
                     line: 7,
                     col: 12
                 },
                 location: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/tests/expectationIndex.test.js',
+                    filename: root + '/test/validator/expectation/tests/expectationIndex.test.js',
                     line: 14,
                     col: 8
                 }
@@ -286,18 +343,41 @@ describe('Expectation Validation', function() {
                 expected: 3,
                 actual: 2,
                 from: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/features/expectationIndex.feature',
+                    filename: root + '/test/validator/expectation/features/expectationIndex.feature',
                     line: 8,
                     col: 12
                 },
                 location: {
-                    filename: '/home/ivo/Desktop/featureful/test/validator/expectation/tests/expectationIndex.test.js',
+                    filename: root + '/test/validator/expectation/tests/expectationIndex.test.js',
                     line: 11,
                     col: 8
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario').getExpectation('And given b').format().split(/\n/).should.be.eql([
+                "- Incorrect Expectation order in test:",
+                "",
+                "      \"And given b\" is currently implemented as expectation #3",
+                "",
+                "  at " + root + "/test/validator/expectation/tests/expectationIndex.test.js (line 14, column 8)",
+                "",
+                "  but should be implemented as #2 as defined in the feature file.",
+                "",
+                "  in " + root + "/test/validator/expectation/features/expectationIndex.feature (line 7, column 12)"
+            ]);
+
+            result.getFeature('A Feature').getScenario('A Scenario').getExpectation('And given c').format().split(/\n/).should.be.eql([
+                "- Incorrect Expectation order in test:",
+                "",
+                "      \"And given c\" is currently implemented as expectation #2",
+                "",
+                "  at " + root + "/test/validator/expectation/tests/expectationIndex.test.js (line 11, column 8)",
+                "",
+                "  but should be implemented as #3 as defined in the feature file.",
+                "",
+                "  in " + root + "/test/validator/expectation/features/expectationIndex.feature (line 8, column 12)"
+            ]);
 
         }, done);
 

@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                 error = validator.compare(specs);
 
             if (error) {
-                console.log(error);
+                console.log(error.format());
                 done(new Error('Test and Features do not match!'));
 
             } else {

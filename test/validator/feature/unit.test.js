@@ -31,15 +31,32 @@ describe('Feature Validation', function() {
             result.getFeature('A Feature without Test').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'Test implementation for feature is missing.',
-                expected: 'should be implemented in {{testLocation}}',
+                actual: 'A Feature without Test',
+                expected: 'should be implemented in matching test file.',
                 from: {
                     filename: root + '/test/validator/feature/features/featureWithoutTestFile.feature',
                     line: 1,
                     col: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/tests/featureWithoutTestFile.test.js',
+                    line: -1,
+                    col: -1
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature without Test').format().split(/\n/).should.be.eql([
+                "- Test implementation for feature is missing.",
+                "",
+                "      \"A Feature without Test\"",
+                "",
+                "  at " + root + "/test/validator/feature/features/featureWithoutTestFile.feature (line 1, column 0)",
+                "",
+                "  should be implemented in matching test file.",
+                "",
+                "  in " + root + "/test/validator/feature/tests/featureWithoutTestFile.test.js"
+            ]);
 
         }, done);
 
@@ -65,15 +82,32 @@ describe('Feature Validation', function() {
             result.getFeature('A Test without Feature').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'Feature specification for test is missing.',
-                expected: 'should be specified in {{featureLocation}}',
+                actual: 'A Test without Feature',
+                expected: 'should be implemented in matching feature file.',
                 from: {
                     filename: root + '/test/validator/feature/tests/testWithoutFeatureFile.test.js',
                     line: 1,
                     col: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/features/testWithoutFeatureFile.feature',
+                    line: -1,
+                    col: -1
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Test without Feature').format().split(/\n/).should.be.eql([
+                "- Feature specification for test is missing.",
+                "",
+                "      \"A Test without Feature\"",
+                "",
+                "  at " + root + "/test/validator/feature/tests/testWithoutFeatureFile.test.js (line 1, column 0)",
+                "",
+                "  should be implemented in matching feature file.",
+                "",
+                "  in " + root + "/test/validator/feature/features/testWithoutFeatureFile.feature"
+            ]);
 
         }, done);
 
@@ -99,15 +133,32 @@ describe('Feature Validation', function() {
             result.getFeature('A Feature without Test').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'Test implementation for feature is missing.',
-                expected: 'should be implemented in {{testLocation}}',
+                actual: 'A Feature without Test',
+                expected: 'should be implemented in matching test file.',
                 from: {
                     filename: root + '/test/validator/feature/features/featureWithoutTest.feature',
                     line: 1,
                     col: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/tests/featureWithoutTest.test.js',
+                    line: -1,
+                    col: -1
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature without Test').format().split(/\n/).should.be.eql([
+                "- Test implementation for feature is missing.",
+                "",
+                "      \"A Feature without Test\"",
+                "",
+                "  at " + root + "/test/validator/feature/features/featureWithoutTest.feature (line 1, column 0)",
+                "",
+                "  should be implemented in matching test file.",
+                "",
+                "  in " + root + "/test/validator/feature/tests/featureWithoutTest.test.js"
+            ]);
 
         }, done);
 
@@ -133,15 +184,32 @@ describe('Feature Validation', function() {
             result.getFeature('A Test without Feature').getErrors().should.be.eql([{
                 type: 'missing',
                 message: 'Feature specification for test is missing.',
-                expected: 'should be specified in {{featureLocation}}',
+                actual: 'A Test without Feature',
+                expected: 'should be implemented in matching feature file.',
                 from: {
                     filename: root + '/test/validator/feature/tests/testWithoutFeature.test.js',
                     line: 1,
                     col: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/features/testWithoutFeature.feature',
+                    line: -1,
+                    col: -1
                 }
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Test without Feature').format().split(/\n/).should.be.eql([
+                "- Feature specification for test is missing.",
+                "",
+                "      \"A Test without Feature\"",
+                "",
+                "  at " + root + "/test/validator/feature/tests/testWithoutFeature.test.js (line 1, column 0)",
+                "",
+                "  should be implemented in matching feature file.",
+                "",
+                "  in " + root + "/test/validator/feature/features/testWithoutFeature.feature"
+            ]);
 
         }, done);
 
@@ -182,6 +250,19 @@ describe('Feature Validation', function() {
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature Title').format().split(/\n/).should.be.eql([
+                "- Incorrect Feature title in test:",
+                "",
+                "      \"A Feature Title mismatch\"",
+                "",
+                "  at " + root + "/test/validator/feature/tests/featureTestTitle.test.js (line 2, column 0)",
+                "",
+                "  does not match the title from the feature file:",
+                "",
+                "      \"A Feature Title\"",
+                "",
+                "  in " + root + "/test/validator/feature/features/featureTestTitle.feature (line 2, column 0)"
+            ]);
 
         }, done);
 
@@ -222,6 +303,31 @@ describe('Feature Validation', function() {
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature Description').format().split(/\n/).should.be.eql([
+                "- Incorrect Feature description in test:",
+                "",
+                "      \"",
+                "      A",
+                "      Description",
+                "      that",
+                "      shoulddoes benot match",
+                "      here.",
+                "      \"",
+                "",
+                "  at " + root + "/test/validator/feature/tests/featureTestDescription.test.js (line 2, column 0)",
+                "",
+                "  does not match the description from the feature file:",
+                "",
+                "      \"",
+                "      A",
+                "      Description",
+                "      that",
+                "      should be",
+                "      here.",
+                "      \"",
+                "",
+                "  in " + root + "/test/validator/feature/features/featureTestDescription.feature (line 2, column 0)"
+            ]);
 
         }, done);
 
@@ -262,14 +368,23 @@ describe('Feature Validation', function() {
             }]);
 
             // Check formatted Error Message
+            result.getFeature('A Feature with Tags').format().split(/\n/).should.be.eql([
+                "- Incorrect Feature tags in test:",
+                "",
+                "      @tagOne @tagTwotagMismatch",
+                "",
+                "  at " + root + "/test/validator/feature/tests/featureTestTags.test.js (line 2, column 0)",
+                "",
+                "  does not match the tags from the feature file:",
+                "",
+                "      @tagOne @tagTwo",
+                "",
+                "  in " + root + "/test/validator/feature/features/featureTestTags.feature (line 2, column 0)"
+            ]);
 
         }, done);
 
     });
-
-    // TODO validate test implementations from multiple files against a feature descriped in one file
-
-    // TODO error out on duplicated feature names
 
 });
 
