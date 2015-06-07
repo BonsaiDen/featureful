@@ -1,6 +1,6 @@
 describe('Spec matching from Tag', function() {
 
-    it('should allow to match up Features and Tests into the same Spec (based on Tags)', function(done) {
+    it('should allow to match up Features and Tests into the same Spec via a Tag Matcher', function(done) {
 
         framework.match(__dirname, function(specs) {
 

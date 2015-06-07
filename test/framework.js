@@ -51,7 +51,7 @@ global.framework = {
 
         framework.parse(dir, options).matchSpecs().then(function(specs) {
             try {
-                callback(specs);
+                callback(specs, options);
                 done();
 
             } catch(err) {

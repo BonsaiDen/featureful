@@ -3,14 +3,14 @@ describe('Feature Validation', function() {
     var Validator = require('../../../../lib/validator/Validator'),
         root = process.cwd();
 
-    it('should not report expected locations for Features and Tests when using Tag matching', function(done) {
+    it('should report expected locations for Features and Tests when using Path matching', function(done) {
 
-        framework.match(__dirname, function(specs) {
+        framework.match(__dirname, function(specs, options) {
 
             // Number of all specs found
             specs.length.should.be.exactly(2);
 
-            var validator = new Validator(),
+            var validator = new Validator(options),
                 result = validator.compare(specs);
 
             // Check error count
@@ -28,10 +28,14 @@ describe('Feature Validation', function() {
                 expected: 'should be implemented in matching test file.',
                 from: {
                     col: 0,
-                    filename: root + '/test/validator/location/missing/features/foo/bar/a.feature',
-                    line: 2
+                    filename: root + '/test/validator/location/expected/features/foo/bar/a.feature',
+                    line: 1
                 },
-                location: null,
+                location: {
+                    col: -1,
+                    filename: root + '/test/validator/location/expected/tests/foo/bar/a.test.js',
+                    line: -1,
+                },
                 message: 'Test implementation for feature is missing.',
                 type: 'missing'
             }]);
@@ -41,10 +45,14 @@ describe('Feature Validation', function() {
                 expected: 'should be implemented in matching feature file.',
                 from: {
                     col: 0,
-                    filename: root + '/test/validator/location/missing/tests/b.test.js',
-                    line: 2
+                    filename: root + '/test/validator/location/expected/tests/foo/bar/b.test.js',
+                    line: 1
                 },
-                location: null,
+                location: {
+                    col: -1,
+                    filename: root + '/test/validator/location/expected/features/foo/bar/b.feature',
+                    line: -1,
+                },
                 message: 'Feature specification for test is missing.',
                 type: 'missing'
             }]);
@@ -54,9 +62,11 @@ describe('Feature Validation', function() {
                 '',
                 '      "Feature A"',
                 '',
-                '  at ' + root + '/test/validator/location/missing/features/foo/bar/a.feature (line 2, column 0)',
+                '  at ' + root + '/test/validator/location/expected/features/foo/bar/a.feature (line 1, column 0)',
                 '',
-                '  should be implemented in matching test file.'
+                '  should be implemented in matching test file.',
+                '',
+                '  in ' + root + '/test/validator/location/expected/tests/foo/bar/a.test.js'
             ]);
 
             result.getFeature('Feature B').format().split(/\n/).should.be.eql([
@@ -64,19 +74,21 @@ describe('Feature Validation', function() {
                 '',
                 '      "Feature B"',
                 '',
-                '  at ' + root + '/test/validator/location/missing/tests/b.test.js (line 2, column 0)',
+                '  at ' + root + '/test/validator/location/expected/tests/foo/bar/b.test.js (line 1, column 0)',
                 '',
-                '  should be implemented in matching feature file.'
+                '  should be implemented in matching feature file.',
+                '',
+                '  in ' + root + '/test/validator/location/expected/features/foo/bar/b.feature'
             ]);
 
         }, done, {
             matcher: {
-                type: 'tag',
-                pattern: /spec\-(\d+)/
+                type: 'path'
             }
         });
 
     });
 
 });
+
 
