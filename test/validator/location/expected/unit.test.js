@@ -42,7 +42,7 @@ describe('Feature Validation', function() {
 
             result.getFeature('Feature B').getErrors().should.be.eql([{
                 actual: 'Feature B',
-                expected: 'should be implemented in matching feature file.',
+                expected: 'should be specified in matching feature file.',
                 from: {
                     col: 0,
                     filename: root + '/test/validator/location/expected/tests/foo/bar/b.test.js',
@@ -76,7 +76,7 @@ describe('Feature Validation', function() {
                 '',
                 '  at ' + root + '/test/validator/location/expected/tests/foo/bar/b.test.js (line 1, column 0)',
                 '',
-                '  should be implemented in matching feature file.',
+                '  should be specified in matching feature file.',
                 '',
                 '  in ' + root + '/test/validator/location/expected/features/foo/bar/b.feature'
             ]);

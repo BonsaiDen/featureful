@@ -83,7 +83,7 @@ describe('Feature Validation', function() {
                 type: 'missing',
                 message: 'Feature specification for test is missing.',
                 actual: 'A Test without Feature',
-                expected: 'should be implemented in matching feature file.',
+                expected: 'should be specified in matching feature file.',
                 from: {
                     filename: root + '/test/validator/feature/tests/testWithoutFeatureFile.test.js',
                     line: 1,
@@ -104,7 +104,7 @@ describe('Feature Validation', function() {
                 "",
                 "  at " + root + "/test/validator/feature/tests/testWithoutFeatureFile.test.js (line 1, column 0)",
                 "",
-                "  should be implemented in matching feature file.",
+                "  should be specified in matching feature file.",
                 "",
                 "  in " + root + "/test/validator/feature/features/testWithoutFeatureFile.feature"
             ]);
@@ -164,6 +164,89 @@ describe('Feature Validation', function() {
 
     });
 
+    it('should report missing Feature and Test files (in case there are already other matching Specs)', function(done) {
+
+        framework.validate(__dirname, 'multiple/*', function(result) {
+
+            // Check total error count
+            result.getCount().should.be.exactly(2);
+
+            // Check feature errors (only Features with errors should be reported)
+            result.getFeatures().should.be.eql(['Feature B', 'Feature C']);
+
+            // Check actual error for Feature
+            result.getFeature('Feature B').getErrors().length.should.be.exactly(1);
+            result.getFeature('Feature C').getErrors().length.should.be.exactly(1);
+
+            // There should be no Scenario errors
+            result.getFeature('Feature B').getScenarios().should.be.eql([]);
+            result.getFeature('Feature C').getScenarios().should.be.eql([]);
+
+            // Check actual Error
+            result.getFeature('Feature C').getErrors().should.be.eql([{
+                type: 'missing',
+                message: 'Feature specification for test is missing.',
+                actual: 'Feature C',
+                expected: 'should be specified in matching feature file.',
+                from: {
+                    filename: root + '/test/validator/feature/tests/multiple/c.test.js',
+                    line: 1,
+                    col: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/features/multiple/c.feature',
+                    line: -1,
+                    col: -1
+                }
+            }]);
+
+            // Check formatted Error Message
+            result.getFeature('Feature C').format().split(/\n/).should.be.eql([
+                "- Feature specification for test is missing.",
+                "",
+                "      \"Feature C\"",
+                "",
+                "  at " + root + "/test/validator/feature/tests/multiple/c.test.js (line 1, column 0)",
+                "",
+                "  should be specified in matching feature file.",
+                "",
+                "  in " + root + "/test/validator/feature/features/multiple/c.feature"
+            ]);
+
+            result.getFeature('Feature B').getErrors().should.be.eql([{
+                type: 'missing',
+                message: 'Test implementation for feature is missing.',
+                actual: 'Feature B',
+                expected: 'should be implemented in matching test file.',
+                from: {
+                    filename: root + '/test/validator/feature/features/multiple/b.feature',
+                    line: 1,
+                    col: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/tests/multiple/b.test.js',
+                    line: -1,
+                    col: -1
+                }
+            }]);
+
+            // Check formatted Error Message
+            result.getFeature('Feature B').format().split(/\n/).should.be.eql([
+                "- Test implementation for feature is missing.",
+                "",
+                "      \"Feature B\"",
+                "",
+                "  at " + root + "/test/validator/feature/features/multiple/b.feature (line 1, column 0)",
+                "",
+                "  should be implemented in matching test file.",
+                "",
+                "  in " + root + "/test/validator/feature/tests/multiple/b.test.js"
+            ]);
+
+        }, done);
+
+    });
+
     it('should report missing Feature descriptions for Test implementations', function(done) {
 
         framework.validate(__dirname, 'testWithoutFeature', function(result) {
@@ -185,7 +268,7 @@ describe('Feature Validation', function() {
                 type: 'missing',
                 message: 'Feature specification for test is missing.',
                 actual: 'A Test without Feature',
-                expected: 'should be implemented in matching feature file.',
+                expected: 'should be specified in matching feature file.',
                 from: {
                     filename: root + '/test/validator/feature/tests/testWithoutFeature.test.js',
                     line: 1,
@@ -206,7 +289,7 @@ describe('Feature Validation', function() {
                 "",
                 "  at " + root + "/test/validator/feature/tests/testWithoutFeature.test.js (line 1, column 0)",
                 "",
-                "  should be implemented in matching feature file.",
+                "  should be specified in matching feature file.",
                 "",
                 "  in " + root + "/test/validator/feature/features/testWithoutFeature.feature"
             ]);
