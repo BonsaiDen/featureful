@@ -5,7 +5,7 @@ describe('AST Extraction', function() {
     var expectedFiles = [
         {
             "type": "FILE",
-            "filename": root + "/test/parser/ast/features/a.feature",
+            "filename": root + "/test/parser/ast/features/valid/a.feature",
             "features": [
                 {
                     "type": "FEATURE",
@@ -16,7 +16,7 @@ describe('AST Extraction', function() {
                     "title": "A Feature",
                     "description": "A \ndescription \nof \nthe \nfeature.",
                     "location": {
-                        "filename": root + "/test/parser/ast/features/a.feature",
+                        "filename": root + "/test/parser/ast/features/valid/a.feature",
                         "line": 2,
                         "col": 0
                     },
@@ -29,7 +29,7 @@ describe('AST Extraction', function() {
                             ],
                             "title": "A Scenario",
                             "location": {
-                                "filename": root + "/test/parser/ast/features/a.feature",
+                                "filename": root + "/test/parser/ast/features/valid/a.feature",
                                 "line": 11,
                                 "col": 4
                             },
@@ -38,7 +38,7 @@ describe('AST Extraction', function() {
                                     "type": "GIVEN",
                                     "title": "Given some condition",
                                     "location": {
-                                        "filename": root + "/test/parser/ast/features/a.feature",
+                                        "filename": root + "/test/parser/ast/features/valid/a.feature",
                                         "line": 12,
                                         "col": 8
                                     }
@@ -49,7 +49,7 @@ describe('AST Extraction', function() {
                                     "type": "WHEN",
                                     "title": "When something happens",
                                     "location": {
-                                        "filename": root + "/test/parser/ast/features/a.feature",
+                                        "filename": root + "/test/parser/ast/features/valid/a.feature",
                                         "line": 13,
                                         "col": 8
                                     }
@@ -60,7 +60,7 @@ describe('AST Extraction', function() {
                                     "type": "THEN",
                                     "title": "Then some action is performed",
                                     "location": {
-                                        "filename": root + "/test/parser/ast/features/a.feature",
+                                        "filename": root + "/test/parser/ast/features/valid/a.feature",
                                         "line": 14,
                                         "col": 8
                                     }
@@ -74,7 +74,7 @@ describe('AST Extraction', function() {
         },
         {
             "type": "FILE",
-            "filename": root + "/test/parser/ast/features/foo/b.feature",
+            "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
             "features": [
                 {
                     "type": "FEATURE",
@@ -82,7 +82,7 @@ describe('AST Extraction', function() {
                     "title": "A Feature",
                     "description": "",
                     "location": {
-                        "filename": root + "/test/parser/ast/features/foo/b.feature",
+                        "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                         "line": 1,
                         "col": 0
                     },
@@ -95,7 +95,7 @@ describe('AST Extraction', function() {
                             ],
                             "title": "A Scenario Outline",
                             "location": {
-                                "filename": root + "/test/parser/ast/features/foo/b.feature",
+                                "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                 "line": 4,
                                 "col": 4
                             },
@@ -104,7 +104,7 @@ describe('AST Extraction', function() {
                                     "type": "GIVEN",
                                     "title": "Given some condition",
                                     "location": {
-                                        "filename": root + "/test/parser/ast/features/foo/b.feature",
+                                        "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 5,
                                         "col": 8
                                     }
@@ -115,7 +115,7 @@ describe('AST Extraction', function() {
                                     "type": "WHEN",
                                     "title": "When something happens",
                                     "location": {
-                                        "filename": root + "/test/parser/ast/features/foo/b.feature",
+                                        "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 6,
                                         "col": 8
                                     }
@@ -126,7 +126,7 @@ describe('AST Extraction', function() {
                                     "type": "THEN",
                                     "title": "Then some action is performed",
                                     "location": {
-                                        "filename": root + "/test/parser/ast/features/foo/b.feature",
+                                        "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 7,
                                         "col": 8
                                     }
@@ -155,11 +155,23 @@ describe('AST Extraction', function() {
 
         var Parser = require('../../..').Parser,
             files = Parser.parseFeatureFromPatterns([
-                __dirname + '/features/**/*.feature'
+                __dirname + '/features/valid/**/*.feature'
             ]);
 
 
         files.should.be.eql(expectedFiles);
+
+    });
+
+    it('should provide a method for extracting the AST of features from files specified by a glob pattern (handling parsing errors)', function() {
+
+        var Parser = require('../../..').Parser,
+            error = Parser.parseFeatureFromPatterns([
+                __dirname + '/features/error/**/*.feature'
+            ]);
+
+        error.should.be.instanceof(Error);
+        error.message.should.be.exactly('Parsing error on line 1, column 0: Unexpected token \'SCENARIO\'.');
 
     });
 

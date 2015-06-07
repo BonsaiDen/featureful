@@ -381,9 +381,47 @@ describe('Expectation Validation', function() {
 
         }, done);
 
-        // TODO error out on duplicated step descriptions
+    });
+/*G
+    it('should report duplicated Expectations in feature files', function(done) {
+
+        framework.validate(__dirname, 'duplicateFeatures', function(result) {
+
+            // Check feature errors (only Features with errors should be reported)
+            result.getFeatures().should.be.eql(['A Feature']);
+
+            // Check scenario errors (only Scenarios with errors should be reported)
+            result.getFeature('A Feature').getScenarios().should.be.eql(['A Scenario']);
+
+            // Check error count for Scenario
+            result.getFeature('A Feature').getScenario('A Scenario').getCount().should.be.exactly(1);
+
+            // There should be no generic Scenario errors
+            result.getFeature('A Feature').getScenario('A Scenario').getErrors().length.should.be.exactly(0);
+
+        }, done);
 
     });
 
+    it('should report duplicated Expectations in test files', function(done) {
+
+        framework.validate(__dirname, 'duplicateTests', function(result) {
+
+            // Check feature errors (only Features with errors should be reported)
+            result.getFeatures().should.be.eql(['A Feature']);
+
+            // Check scenario errors (only Scenarios with errors should be reported)
+            result.getFeature('A Feature').getScenarios().should.be.eql(['A Scenario']);
+
+            // Check error count for Scenario
+            result.getFeature('A Feature').getScenario('A Scenario').getCount().should.be.exactly(1);
+
+            // There should be no generic Scenario errors
+            result.getFeature('A Feature').getScenario('A Scenario').getErrors().length.should.be.exactly(0);
+
+        }, done);
+
+    });
+*/
 });
 
