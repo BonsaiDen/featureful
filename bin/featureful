@@ -3,14 +3,14 @@
 // Dependencies ---------------------------------------------------------------
 // ----------------------------------------------------------------------------
 var path = require('path'),
-    Parser = require('../lib/Parser'),
-    Validator = require('../lib/Validator');
+    Parser = require('../lib/spec/Parser'),
+    Validator = require('../lib/validator/Validator');
 
 
 // Command Line API -----------------------------------------------------------
 // ----------------------------------------------------------------------------
 if (process.argv.length < 3) {
-    process.stdout.write('Usage: featureful pattern [pattern...]\n\n  --help     Displays help text.\n\n');
+    process.stdout.write('Usage: featureful [configfile | pattern...]\n');
     process.exit(0);
 
 } else {
