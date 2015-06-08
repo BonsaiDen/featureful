@@ -18,7 +18,7 @@ if (process.argv.length < 3) {
     // Verification of Tests against Features
     if (process.argv[2].match(/\.js$/)) {
 
-        var options = require(path.join(process.cwd(), process.argv[2])),
+        var options = require(process.argv[2]),
             parser = new Parser(options);
 
         parser.matchSpecs().then(function(specs) {

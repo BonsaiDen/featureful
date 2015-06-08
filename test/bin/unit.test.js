@@ -19,12 +19,10 @@ describe('Binary', function() {
 
     });
 
-    it('should parse and print the AST of one or more Feature files when one or more glob patterns are passed as the arguments', function(done) {
+    it('should parse and print the AST of one or more Feature files when a glob patterns is passed as the argument', function(done) {
 
         var child = exec(root + '/bin/featureful ' + root + '/test/bin/parser/features/**/*.feature', function(error, stdout, stderr) {
 
-            child.exitCode.should.be.exactly(0);
-            should(error).be.exactly(null);
             stdout.should.be.exactly(
                 '['
                 + '\n  {'
@@ -67,6 +65,8 @@ describe('Binary', function() {
             );
 
             stderr.should.be.exactly('');
+            should(error).be.exactly(null);
+            child.exitCode.should.be.exactly(0);
 
             done();
 
@@ -74,11 +74,44 @@ describe('Binary', function() {
 
     });
 
-    it('should validate Features and Tests with options a specified from a configuration file and exit with code 0 in case Features and Tests match', function() {
+    it('should validate Features and Tests with options a specified from a configuration file and exit with code 0 in case Features and Tests match', function(done) {
+
+        var child = exec(root + '/bin/featureful ' + root + '/test/bin/validator/valid/config.js', function(error, stdout, stderr) {
+
+            stdout.should.be.exactly('');
+            stderr.should.be.exactly('');
+            should(error).be.exactly(null);
+            child.exitCode.should.be.exactly(0);
+
+            done();
+
+        });
 
     });
 
-    it('should validate Features and Tests with options a specified from a configuration file and exit with code 0 in case Features and Tests match', function() {
+    it('should validate Features and Tests with options a specified from a configuration file and exit with code 0 in case Features and Tests match', function(done) {
+
+        var child = exec(root + '/bin/featureful ' + root + '/test/bin/validator/error/config.js', function(error, stdout, stderr) {
+
+            stdout.should.be.exactly('');
+            stderr.should.be.exactly(
+                'Feature: Feature A'
+                + '\n'
+                + '\n    - Test implementation for feature is missing.'
+                + '\n    '
+                + '\n          "Feature A"'
+                + '\n    '
+                + '\n      at /home/ivo/Desktop/featureful/test/bin/validator/error/features/a.feature (line 1, column 0)'
+                + '\n    '
+                + '\n      should be implemented in matching test file.'
+            );
+
+            should(error).not.be.exactly(null);
+            child.exitCode.should.be.exactly(1);
+
+            done();
+
+        });
 
     });
 
