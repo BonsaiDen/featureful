@@ -140,14 +140,14 @@ $ featureful features/**/*.feature
 ```
 
 
-## TODO
+## TODOs
 
-- Index Comparisons 
-- Keyword specifications for languages other than English and German
-- Support for other Frameworks and Languages
+- Fully test `featureful` binary
+- Add support for ignores (via tags, file paths, custom matchers)
+- Support for other Frameworks:
 
     - JUnit
-    - OCUnit
+    - OCMock
 
 
 ## Licensed under MIT
