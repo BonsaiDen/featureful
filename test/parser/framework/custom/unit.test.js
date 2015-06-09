@@ -5,7 +5,9 @@ describe('Parser Framework Custom', function() {
     it('should allow to use and load custom test parser frameworks from node modules', function() {
 
         var parser = new Parser({
-            framework: __dirname + '/unit.test.js'
+            tests: {
+                framework: __dirname + '/unit.test.js'
+            }
         });
 
         parser.getFramework().should.be.instanceof(CustomFramework);
@@ -17,7 +19,9 @@ describe('Parser Framework Custom', function() {
         var parser;
         try {
             parser = new Parser({
-                framework: __dirname + '/missingModule.js'
+                tests: {
+                    framework: __dirname + '/missingModule.js'
+                }
             });
 
         } catch(err) {

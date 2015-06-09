@@ -101,7 +101,7 @@ describe('Binary', function() {
                 + '\n    '
                 + '\n          "Feature A"'
                 + '\n    '
-                + '\n      at /home/ivo/Desktop/featureful/test/bin/validator/error/features/a.feature (line 1, column 0)'
+                + '\n      at ' + root + '/test/bin/validator/error/features/a.feature (line 1, column 0)'
                 + '\n    '
                 + '\n      should be implemented in matching test file.'
             );

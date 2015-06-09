@@ -25,9 +25,12 @@ global.framework = {
 
         options.tests = {
             pattern: dir + '/tests/**/*.test.js',
+            framework: 'mocha'
         };
 
-        options.framework = 'mocha';
+        options.specs = {
+            matching: options.matching
+        };
 
         return new Parser(options);
 
@@ -71,13 +74,14 @@ global.framework = {
         };
 
         options.tests = {
-            pattern: dir + '/tests/' + id + '.test.js'
+            pattern: dir + '/tests/' + id + '.test.js',
+            framework: options.framework || 'mocha'
         };
 
-        options.framework = options.framework || 'mocha';
-
-        options.matcher = options.matcher || {
-            type: 'path'
+        options.specs = {
+            matching: options.matching || {
+                type: 'path'
+            }
         };
 
         new Parser(options).matchSpecs().then(function(specs) {
@@ -86,7 +90,7 @@ global.framework = {
                 error = validator.compare(specs);
 
             try {
-                callback(error);
+                callback(error, specs);
                 done();
 
             } catch(err) {

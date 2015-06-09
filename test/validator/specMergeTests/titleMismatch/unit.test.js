@@ -40,7 +40,7 @@ describe('Multi Validation', function() {
             // Check formatted Error Message
 
         }, done, {
-            matcher: {
+            matching: {
                 type: 'tag',
                 pattern: /tagFeature/
             }

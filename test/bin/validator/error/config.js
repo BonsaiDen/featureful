@@ -5,12 +5,13 @@ module.exports = {
     },
 
     tests: {
-        pattern: __dirname + '/tests/**/*.test.js'
+        pattern: __dirname + '/tests/**/*.test.js',
+        framework: 'mocha'
     },
 
-    framework: 'mocha',
-
-    match: 'path'
+    specs: {
+        matching: 'path'
+    }
 
 };
 

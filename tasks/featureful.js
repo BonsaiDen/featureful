@@ -15,26 +15,29 @@ module.exports = function(grunt) {
         var done = this.async(),
             options = this.options();
 
-        var parser = new Parser(options);
-        parser.matchSpecs().then(function(specs) {
+        try {
+            var parser = new Parser(options);
+            parser.matchSpecs().then(function(specs) {
 
-            grunt.log.ok('Comparing Test and Features...');
+                grunt.log.ok('Comparing Test and Features...');
 
-            var validator = new Validator(options),
-                error = validator.compare(specs);
+                var validator = new Validator(options),
+                    error = validator.compare(specs);
 
-            if (error) {
-                grunt.log.writeln(error.format());
-                done(new Error('Tests and Features do not match!'));
+                if (error) {
+                    grunt.log.writeln('\n' + error.format() + '\n');
+                    done(new Error('Tests and Features do not match!'));
 
-            } else {
-                grunt.log.ok('Tests and Features are up to date.');
-                done();
-            }
+                } else {
+                    grunt.log.ok('Tests and Features are up to date.');
+                    done();
+                }
 
-        }, function(err) {
+            });
+
+        } catch(err) {
             grunt.fail.fatal(err);
-        });
+        }
 
     });
 

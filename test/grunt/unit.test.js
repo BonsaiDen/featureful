@@ -6,6 +6,7 @@ describe('Grunt', function() {
 
         var logs = [],
             tasks = [],
+            callback = null,
             failure = null;
 
         return {
@@ -33,12 +34,16 @@ describe('Grunt', function() {
             fail: {
                 fatal: function(err) {
                     failure = err;
+                    callback(err);
                 }
             },
 
 
             // Test API
             run: function(options, done) {
+
+                callback = done;
+
                 tasks[0].callback.call({
 
                     async: function() {
@@ -50,6 +55,7 @@ describe('Grunt', function() {
                     }
 
                 });
+
             },
 
             getLogs: function() {
@@ -101,10 +107,9 @@ describe('Grunt', function() {
             },
 
             tests: {
-                pattern: __dirname + '/valid/tests/**/*.test.js'
-            },
-
-            framework: 'mocha'
+                pattern: __dirname + '/valid/tests/**/*.test.js',
+                framework: 'mocha'
+            }
 
         }, function() {
 
@@ -120,7 +125,6 @@ describe('Grunt', function() {
             // Should call done() without arguments
             arguments.length.should.be.exactly(0);
 
-
             done();
 
         });
@@ -130,6 +134,7 @@ describe('Grunt', function() {
     it('should parse and validate specs with errors via the Grunt Task, report them and fail the task', function(done) {
 
         var grunt = MockGrunt(),
+            root = process.cwd(),
             mod = require('../../tasks/featureful.js');
 
         mod(grunt);
@@ -141,25 +146,26 @@ describe('Grunt', function() {
             },
 
             tests: {
-                pattern: __dirname + '/error/tests/**/*.test.js'
-            },
-
-            framework: 'mocha'
+                pattern: __dirname + '/error/tests/**/*.test.js',
+                framework: 'mocha'
+            }
 
         }, function(error) {
 
             // Should log
             grunt.getLogs().should.be.eql([
                 'Comparing Test and Features...',
+                '',
                 'Feature: A Feature',
                 '',
                 '    - Test implementation for feature is missing.',
                 '    ',
                 '          "A Feature"',
                 '    ',
-                '      at /home/ivo/Desktop/featureful/test/grunt/error/features/a.feature (line 1, column 0)',
+                '      at ' + root + '/test/grunt/error/features/a.feature (line 1, column 0)',
                 '    ',
-                '      should be implemented in matching test file.'
+                '      should be implemented in matching test file.',
+                ''
             ]);
 
             // Should not fail hard
@@ -169,6 +175,35 @@ describe('Grunt', function() {
             arguments.length.should.be.exactly(1);
             error.should.be.instanceof(Error);
             error.message.should.be.exactly('Tests and Features do not match!');
+
+            done();
+
+        });
+
+    });
+
+    it('should fail the Grunt Task in case of unexpected errors', function(done) {
+
+        var grunt = MockGrunt(),
+            mod = require('../../tasks/featureful.js');
+
+        mod(grunt);
+
+        grunt.run({
+            // No configuration
+
+        }, function(error) {
+
+            // Should log
+            grunt.getLogs().should.be.eql([]);
+
+            // Should not fail hard
+            should(grunt.getFailure()).be.instanceof(Error);
+
+            // Should call done() with an error
+            arguments.length.should.be.exactly(1);
+            error.should.be.instanceof(Error);
+            error.message.should.be.exactly('Cannot read property \'framework\' of undefined');
 
             done();
 

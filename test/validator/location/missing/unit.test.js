@@ -70,7 +70,7 @@ describe('Feature Validation', function() {
             ]);
 
         }, done, {
-            matcher: {
+            matching: {
                 type: 'tag',
                 pattern: /spec\-(\d+)/
             }

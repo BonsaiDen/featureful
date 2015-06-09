@@ -37,10 +37,21 @@ describe('AST Extraction', function() {
                                 {
                                     "type": "GIVEN",
                                     "title": "Given some condition",
+                                    "data": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
                                         "line": 12,
                                         "col": 8
+                                    }
+                                },
+                                {
+                                    "type": "GIVEN",
+                                    "title": "And given a doc string",
+                                    "data": "A doc string text.\n\nWith multiple lines.\n\nOf text.",
+                                    "location": {
+                                        "col": 12,
+                                        "filename": root + "/test/parser/ast/features/valid/a.feature",
+                                        "line": 13
                                     }
                                 }
                             ],
@@ -48,9 +59,10 @@ describe('AST Extraction', function() {
                                 {
                                     "type": "WHEN",
                                     "title": "When something happens",
+                                    "data": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
-                                        "line": 13,
+                                        "line": 22,
                                         "col": 8
                                     }
                                 }
@@ -59,10 +71,37 @@ describe('AST Extraction', function() {
                                 {
                                     "type": "THEN",
                                     "title": "Then some action is performed",
+                                    "data": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
-                                        "line": 14,
+                                        "line": 23,
                                         "col": 8
+                                    },
+                                },
+                                {
+                                   "type": "THEN",
+                                   "title": "And then a data table is parsed",
+                                    "data": {
+                                        "color": [
+                                            "red",
+                                            "green",
+                                            "blue",
+                                        ],
+                                        "hex": [
+                                            "#ff0000",
+                                            "#00ff00",
+                                            "#0000ff"
+                                        ],
+                                        "index": [
+                                            "0",
+                                            "1",
+                                            "2"
+                                        ]
+                                    },
+                                    "location": {
+                                        "col": 12,
+                                        "filename": root + "/test/parser/ast/features/valid/a.feature",
+                                        "line": 24
                                     }
                                 }
                             ],
@@ -103,6 +142,7 @@ describe('AST Extraction', function() {
                                 {
                                     "type": "GIVEN",
                                     "title": "Given some condition",
+                                    "data": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 5,
@@ -114,6 +154,7 @@ describe('AST Extraction', function() {
                                 {
                                     "type": "WHEN",
                                     "title": "When something happens",
+                                    "data": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 6,
@@ -125,6 +166,7 @@ describe('AST Extraction', function() {
                                 {
                                     "type": "THEN",
                                     "title": "Then some action is performed",
+                                    "data": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 7,

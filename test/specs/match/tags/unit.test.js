@@ -40,7 +40,7 @@ describe('Spec matching from Tag', function() {
             specs[1].getTests()[0].getLocation().filename.should.be.exactly(__dirname + '/tests/a.test.js');
 
         }, done, {
-            matcher: {
+            matching: {
                 type: 'tag',
                 pattern: /spec\-(\d+)/
             }

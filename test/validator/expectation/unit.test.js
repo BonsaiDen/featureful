@@ -4,7 +4,7 @@ describe('Expectation Validation', function() {
 
     it('should validate matching Expectations from Features and Tests', function(done) {
 
-        framework.validate(__dirname, 'a', function(result) {
+        framework.validate(__dirname, 'a', function(result, specs) {
             result.should.be.exactly(false);
 
         }, done);

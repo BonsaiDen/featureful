@@ -82,7 +82,7 @@ describe('Feature Validation', function() {
             ]);
 
         }, done, {
-            matcher: {
+            matching: {
                 type: 'path'
             }
         });

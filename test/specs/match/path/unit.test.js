@@ -40,7 +40,7 @@ describe('Spec matching from Path', function() {
             specs[1].getTests()[0].getLocation().filename.should.be.exactly(__dirname + '/tests/foo/a.test.js');
 
         }, done, {
-            matcher: {
+            matching: {
                 type: 'path'
             }
         });

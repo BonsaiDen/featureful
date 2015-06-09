@@ -36,7 +36,7 @@ describe('Spec matching from Tag', function() {
             specs[0].getTests()[0].getLocation().filename.should.be.exactly(__dirname + '/tests/a.test.js');
 
         }, done, {
-            matcher: function matcherFunction(object, path, options) {
+            matching: function matchingFunction(object, path, options) {
 
                 // Should first try to match all Features
                 if (index === 0) {
@@ -117,7 +117,7 @@ describe('Spec matching from Tag', function() {
                     });
 
                 } else {
-                    throw new Error('Unexpected fifth matcher call.');
+                    throw new Error('Unexpected fifth matching call.');
                 }
 
                 // Should pass in the Parser options
@@ -125,10 +125,12 @@ describe('Spec matching from Tag', function() {
                     features: {
                         pattern: root + '/test/specs/match/custom/features/**/*.feature'
                     },
-                    framework: 'mocha',
-                    matcher: matcherFunction,
                     tests: {
-                        pattern: root + '/test/specs/match/custom/tests/**/*.test.js'
+                        pattern: root + '/test/specs/match/custom/tests/**/*.test.js',
+                        framework: 'mocha'
+                    },
+                    specs: {
+                        matching: matchingFunction,
                     }
                 });
 
