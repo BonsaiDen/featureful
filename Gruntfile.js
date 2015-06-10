@@ -44,7 +44,13 @@ module.exports = function(grunt) {
                     require: [
                         './test/framework'
                     ],
-                    reportFormats: ['text-summary', 'html', 'lcovonly']
+                    reportFormats: ['text-summary', 'html', 'lcovonly'],
+                    check: {
+                        statements: 100,
+                        branches: 100,
+                        functions: 100,
+                        lines: 100
+                    }
                 }
             }
         },
@@ -64,6 +70,22 @@ module.exports = function(grunt) {
 
         }
 
+    });
+
+
+    // Coveralls Integration --------------------------------------------------
+    grunt.event.on('coverage', function(lcov, done){
+        console.log(lcov);
+        require('coveralls').handleInput(lcov, function(err){
+
+            if (err) {
+                return done(err);
+
+            } else {
+                done();
+            }
+
+        });
     });
 
 

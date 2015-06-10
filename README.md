@@ -1,10 +1,31 @@
+[![Dependency Status](https://david-dm.org/bonsaiden/featureful.png?theme=shields.io)](https://david-dm.org/bonsaiden/featureful)
+[![Coverage Status](https://coveralls.io/repos/BonsaiDen/featureful/badge.svg)](https://coveralls.io/r/BonsaiDen/featureful)
+[![Travis CI](https://travis-ci.org/BonsaiDen/featureful.svg)](https://travis-ci.org/BonsaiDen/featureful) 
+
+[![NPM](https://nodei.co/npm/featureful.png?downloads=true&stars=true)](https://nodei.co/npm/featureful/)
+
 featureful
 ----------
 
-Automatically verify your tests implementations against cucumber feature specs.
+Automatic verification of your test implementations against cucumber features.
+
+**featureful** makes it easy to keep your test implementations and feature 
+descriptions in sync, by providing configurable, pattern based Spec matching 
+and validation.
+
+*featureful* supports a variety of testing frameworks and does not require any 
+integration with your current test runner at all. 
+
+It achieves this by performing the following three simple steps:
+
+1. Find **Tests** and **Features**
+2. Match Tests and Features into **Specs**
+3. Compare and validate the Specs, reporting any errors
 
 
-## Terminology
+### Terminology
+
+The following terminology will be used throughout the documentation:
 
 - __Feature__
 
@@ -25,83 +46,6 @@ Automatically verify your tests implementations against cucumber feature specs.
 > Note: A explained above, a Spec can actually consist of multiple Feature and Tests files, as long as the all reference (match) to the same exact Feature.
 
 
-## Options
-
-**featureful** provides the following options for configuration in order to match 
-the needs of your environment:
-
-- *Object* `features`: Configuration options for finding and parsing cucumber \*.feature files
-    
-    - *String* `pattern`: A glob pattern matching the locations of your feature files
-
-
-- *Object* `tests` : Configuration options for finding and parsing your test files
-
-    - *String* `pattern`: A glob pattern matching the locations of your strings
-
-    - *String* `framework`: The Framework your tests use
-      
-      > **Built-in frameworks** 
-      > 
-      > We currently provide support for:
-      > * `mocha`
-      > * `junit` (WIP)
-      > * `ocmock` (WIP)
-      >
-      > For examples please take a look at `/test/parser/framework`.
-      
-      > **Custom frameworks**
-      >
-      > You can also specify the path to your Node.js module that exports your custom Framework constructor.
-      >
-      > For details on how to implement your own framework parser, please take a look at `/lib/framework`.
-      
-- *Object* `specs`: Configurations for matching and ignoring specs
-
-    - *Object* `matching`: Configuration on how to match **Features** and **Tests** up into **Specs**
-
-        - *String|Function* `method`: The method to use for matching
-
-         This can be either one of the builtin methods:
-         
-         * `title` *(the default)*: Will match Features and Tests based on their titles.
-         
-           This allows for multiple files per feature / test, but will **not** be able to nicely report typos in Feature / Test titles.
-         
-         * `path`: Will use the glob patterns defined for tests and features to match up the files.
-         
-           For example the patterns `feature/**/*.feature` and `test/**/*.test.js` would expect the file `feature/foo/bar/a.feature` to have its test implemented in `test/foo/bar/a.test.js` and the other way around.
-     
-           This does **not** support multiple files per feature / test, but can report typos in Feature / Test titles and requires little setup except for the initial directory structure.
-     
-         * `tag`: Will match Features and Tests based on their Tag annotations.
-
-         Or a custom function in the form of `String: matcher(Test/Feature, PathDescriptor, Options)`, please refer to `/test/specs/match/custom` for implementation details.
-        
-        - *RegExp* `pattern`: A pattern for the built-in `tag` matching method.
-        
-        An example would be`/^spec\-(\d+)/`, where the capure group should be the unique identifier for the **Spec**.
-
-### Example of a featureful options object
-
-```javascript
-{
-
-    features: {
-        pattern: 'features/**/*.feature'
-    },
-
-    tests: {
-        pattern: 'tests/**/*.test.js',
-        framework: 'mocha'
-    },
-    
-    specs: {
-        matching: 'path'
-    }
-
-}
-```
 
 ## Command Line API
 
@@ -212,6 +156,92 @@ grunt.initConfig({
 grunt.loadNpmTasks('featureful');
 ```
 
+## Options
+
+**featureful** provides the following options for configuration in order to match 
+the needs of your environment:
+
+- *Object* `features`: Configuration options for finding and parsing cucumber \*.feature files
+    
+    - *String* `pattern`: A glob pattern matching the locations of your feature files
+
+
+- *Object* `tests` : Configuration options for finding and parsing your test files
+
+    - *String* `pattern`: A glob pattern matching the locations of your strings
+
+    - *String* `framework`: The Framework your tests use
+      
+      > **Built-in frameworks** 
+      > 
+      > We currently provide support for:
+      > * `mocha`
+      > * `junit` (WIP)
+      > * `ocmock` (WIP)
+      >
+      > For examples please take a look at `/test/parser/framework`.
+      
+      > **Custom frameworks**
+      >
+      > You can also specify the path to your Node.js module that exports your custom Framework constructor.
+      >
+      > For details on how to implement your own framework parser, please take a look at `/lib/framework`.
+      
+- *Object* `specs`: Configurations for matching and ignoring specs
+
+    - *Object* `matching`: Configuration on how to match **Features** and **Tests** up into **Specs**
+
+        - *String|Function* `method`: The method to use for matching
+
+         This can be either one of the builtin methods:
+         
+         * `title` *(the default)*: Will match Features and Tests based on their titles.
+         
+           This allows for multiple files per feature / test, but will **not** be able to nicely report typos in Feature / Test titles.
+         
+         * `path`: Will use the glob patterns defined for tests and features to match up the files.
+         
+           For example the patterns `feature/**/*.feature` and `test/**/*.test.js` would expect the file `feature/foo/bar/a.feature` to have its test implemented in `test/foo/bar/a.test.js` and the other way around.
+     
+           This does **not** support multiple files per feature / test, but can report typos in Feature / Test titles and requires little setup except for the initial directory structure.
+     
+         * `tag`: Will match Features and Tests based on their Tag annotations.
+
+         Or a custom function in the form of `String: matcher(Test/Feature, PathDescriptor, Options)`, please refer to `/test/specs/match/custom` for implementation details.
+        
+        - *RegExp* `pattern`: A pattern for the built-in `tag` matching method.
+        
+        An example would be`/^spec\-(\d+)/`, where the capure group should be the unique identifier for the **Spec**.
+
+### Example of a featureful options object
+
+```javascript
+{
+
+    features: {
+        // Match all feature files under this glob pattern
+        pattern: 'features/**/*.feature'
+    },
+
+    tests: {
+
+        // Match all feature files under this glob pattern
+        pattern: 'tests/**/*.test.js',
+
+        // Tests are written in BDD style using Mocha
+        framework: 'mocha'
+    },
+    
+    specs: {
+        // We want our Features and Tests to be combined 
+        // into Specs based on their paths
+        matching: 'path'
+    }
+
+}
+```
+
+
 ## Licensed under MIT
 
 Copyright (c) 2015 Ivo Wetzel.
@@ -233,5 +263,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
 
