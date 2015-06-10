@@ -5,7 +5,7 @@ describe('A Feature', function() {
      * Test
      * Description.
      */
-    someExpression();
+    1 + 2;
 
 });
 

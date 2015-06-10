@@ -46,7 +46,7 @@ global.framework = {
     },
 
     parseTest: function(framework, filename, prefix) {
-        var Framework = require(path.join('../lib/', 'framework', framework + '.js'));
+        var Framework = require(path.join('../lib/test/framework', framework + '.js'));
         return new Framework().parse(filename, prefix);
     },
 

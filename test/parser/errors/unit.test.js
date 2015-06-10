@@ -18,6 +18,15 @@ describe('Parsing Errors', function() {
 
     });
 
+    it('should fail when parsing empty example table data for Steps', function() {
+
+        var feature = framework.parseFeature(__dirname + '/features/invalidStepTable.feature');
+
+        feature.should.be.instanceof(Error);
+        feature.message.should.be.exactly('Parsing error on line 5, column 8: Expected at least one row of table data for step.');
+
+    });
+
     it('should fail when parsing multiple background definitions for a single Feature', function() {
 
         var feature = framework.parseFeature(__dirname + '/features/multipleBackgrounds.feature');
@@ -27,12 +36,21 @@ describe('Parsing Errors', function() {
 
     });
 
-    it('should fail when parsing AND before given/when/then steps in scenario', function() {
+    it('should fail when parsing "And" before Given / When / Then steps in scenario', function() {
 
-        var feature = framework.parseFeature(__dirname + '/features/invalidSteps.feature');
+        var feature = framework.parseFeature(__dirname + '/features/invalidStepsAnd.feature');
 
         feature.should.be.instanceof(Error);
-        feature.message.should.be.exactly('Parsing error on line 4, column 8: Expected a Given/Then/When before AND in scenario steps.');
+        feature.message.should.be.exactly('Parsing error on line 4, column 8: Expected a Given / Then / When before "And" in scenario steps.');
+
+    });
+
+    it('should fail when parsing "But" before Given / When / Then steps in scenario', function() {
+
+        var feature = framework.parseFeature(__dirname + '/features/invalidStepsBut.feature');
+
+        feature.should.be.instanceof(Error);
+        feature.message.should.be.exactly('Parsing error on line 4, column 8: Expected a Given / Then / When before "But" in scenario steps.');
 
     });
 

@@ -76,6 +76,21 @@ describe('Expectation Validation', function() {
                 "  in " + root + "/test/validator/expectation/tests/expectationWithoutTest.test.js (line 3, column 4)"
             ]);
 
+            // Check formatterd Error Message of the Scenario
+            result.getFeature('A Feature').getScenario('A Scenario').format().split(/\n/).should.be.eql([
+                "Expectation: Given something",
+                "",
+                "- Test implementation is missing for Expectation:",
+                "",
+                "      \"Given something\"",
+                "",
+                "  at " + root + "/test/validator/expectation/features/expectationWithoutTest.feature (line 4, column 8)",
+                "",
+                "  should be implemented under existing parent test.",
+                "",
+                "  in " + root + "/test/validator/expectation/tests/expectationWithoutTest.test.js (line 3, column 4)"
+            ]);
+
         }, done);
 
     });
@@ -137,6 +152,21 @@ describe('Expectation Validation', function() {
 
             // Check formatted Error Message
             result.getFeature('A Feature').getScenario('A Scenario').getExpectation('Given something').format().split(/\n/).should.be.eql([
+                "- Feature specification is missing for Expectation:",
+                "",
+                "      \"Given something\"",
+                "",
+                "  at " + root + "/test/validator/expectation/tests/expectationWithoutFeature.test.js (line 5, column 8)",
+                "",
+                "  should be specified under existing parent feature.",
+                "",
+                "  in " + root + "/test/validator/expectation/features/expectationWithoutFeature.feature (line 3, column 4)"
+            ]);
+
+            // Check formatterd Error Message of the Scenario
+            result.getFeature('A Feature').getScenario('A Scenario').format().split(/\n/).should.be.eql([
+                "Expectation: Given something",
+                "",
                 "- Feature specification is missing for Expectation:",
                 "",
                 "      \"Given something\"",
@@ -382,7 +412,7 @@ describe('Expectation Validation', function() {
         }, done);
 
     });
-/*G
+/*
     it('should report duplicated Expectations in feature files', function(done) {
 
         framework.validate(__dirname, 'duplicateFeatures', function(result) {

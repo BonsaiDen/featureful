@@ -1,4 +1,6 @@
-// ### A Feature
+/**
+ * A Feature
+ */
 public class Test extends TestCase {
 
     /**
@@ -7,7 +9,9 @@ public class Test extends TestCase {
      * Description. 
      */
 
-    /// ### A Scenario
+    /**
+     * A Scenario
+     */
     public void testSomething() throws Exception {
 
         // ### Given some condition

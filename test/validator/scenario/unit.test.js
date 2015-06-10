@@ -64,6 +64,21 @@ describe('Scenario Validation', function() {
                 "  in " + root + "/test/validator/scenario/tests/scenarioWithoutTest.test.js (line 1, column 0)"
             ]);
 
+            // Check formatterd Error Message of the Feature
+            result.getFeature('A Feature').format().split(/\n/).should.be.eql([
+                "Scenario: A Scenario without Test",
+                "",
+                "- No test for Scenario:",
+                "",
+                "      \"A Scenario without Test\"",
+                "",
+                "  at " + root + "/test/validator/scenario/features/scenarioWithoutTest.feature (line 3, column 4)",
+                "",
+                "  should be implemented under existing parent test.",
+                "",
+                "  in " + root + "/test/validator/scenario/tests/scenarioWithoutTest.test.js (line 1, column 0)"
+            ]);
+
         }, done);
 
     });
@@ -110,6 +125,21 @@ describe('Scenario Validation', function() {
 
             // Check formatted Error Message
             result.getFeature('A Feature').getScenario('A Scenario without Feature').format().split(/\n/).should.be.eql([
+                "- No specification for Scenario:",
+                "",
+                "      \"A Scenario without Feature\"",
+                "",
+                "  at " + root + "/test/validator/scenario/tests/testWithoutScenario.test.js (line 3, column 4)",
+                "",
+                "  should be specified under existing parent feature.",
+                "",
+                "  in " + root + "/test/validator/scenario/features/testWithoutScenario.feature (line 1, column 0)"
+            ]);
+
+            // Check formatterd Error Message of the Feature
+            result.getFeature('A Feature').format().split(/\n/).should.be.eql([
+                "Scenario: A Scenario without Feature",
+                "",
                 "- No specification for Scenario:",
                 "",
                 "      \"A Scenario without Feature\"",
