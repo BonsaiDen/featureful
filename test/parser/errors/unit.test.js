@@ -72,5 +72,23 @@ describe('Parsing Errors', function() {
 
     });
 
+    it('should fail when parsing a "When" step in a Background Definition', function() {
+
+        var feature = framework.parseFeature(__dirname + '/features/invalidBackgroundWhen.feature');
+
+        feature.should.be.instanceof(Error);
+        feature.message.should.be.exactly('Parsing error on line 2, column 4: "When" step is not allowed in scenario background definition.');
+
+    });
+
+    it('should fail when parsing a "Then step in a Background Definition', function() {
+
+        var feature = framework.parseFeature(__dirname + '/features/invalidBackgroundThen.feature');
+
+        feature.should.be.instanceof(Error);
+        feature.message.should.be.exactly('Parsing error on line 2, column 4: "Then" step is not allowed in scenario background definition.');
+
+    });
+
 });
 
