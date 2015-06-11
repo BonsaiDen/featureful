@@ -38,7 +38,7 @@ module.exports = function(grunt) {
             coverage: {
                 src: ['test/**/unit.test.js'],
                 options: {
-                    coverage: true,
+                    coverage: !!process.env.COVERALLS_REPO_TOKEN,
                     clearRequireCache: true,
                     slow: 250,
                     require: [
@@ -75,7 +75,6 @@ module.exports = function(grunt) {
 
     // Coveralls Integration --------------------------------------------------
     grunt.event.on('coverage', function(lcov, done){
-        console.log(lcov);
         require('coveralls').handleInput(lcov, function(err){
 
             if (err) {
