@@ -1,6 +1,6 @@
-describe('Spec matching from Path', function() {
+describe('Spec Matching', function() {
 
-    it('should allow to match up Features and Tests into the same Spec via their Paths', function(done) {
+    it('should allow to match up Features and Tests into the same Spec based on their Paths', function(done) {
 
         framework.match(__dirname, function(specs) {
 

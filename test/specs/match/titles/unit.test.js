@@ -1,6 +1,6 @@
-describe('Spec matching from Title', function() {
+describe('Spec Matching', function() {
 
-    it('should by DEFAULT match up Features and Tests into the same Spec via their Titles', function(done) {
+    it('should by DEFAULT match up Features and Tests into the same Spec based on their Titles', function(done) {
 
         framework.match(__dirname, function(specs) {
 

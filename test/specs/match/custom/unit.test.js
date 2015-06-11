@@ -1,9 +1,9 @@
-describe('Spec matching from Tag', function() {
+describe('Spec Matching', function() {
 
     var root = process.cwd(),
         Test = require('../../../../lib/test/Test');
 
-    it('should allow to match up Features and Tests into the same Spec (base on custom functions)', function(done) {
+    it('should allow to match up Features and Tests into the same Spec based on custom functions', function(done) {
 
         var index = 0;
         framework.match(__dirname, function(specs) {
@@ -34,6 +34,9 @@ describe('Spec matching from Tag', function() {
 
             // Check Test Filenames
             specs[0].getTests()[0].getLocation().filename.should.be.exactly(__dirname + '/tests/a.test.js');
+
+            // Check matching function calls
+            index.should.be.exactly(4);
 
         }, done, {
             matching: function matchingFunction(object, path, options) {
@@ -130,7 +133,8 @@ describe('Spec matching from Tag', function() {
                         framework: 'mocha'
                     },
                     specs: {
-                        matching: matchingFunction,
+                        ignores: {},
+                        matching: matchingFunction
                     }
                 });
 
@@ -151,6 +155,4 @@ describe('Spec matching from Tag', function() {
     });
 
 });
-
-
 

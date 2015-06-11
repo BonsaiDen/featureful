@@ -1,6 +1,6 @@
-describe('Spec matching from Tag', function() {
+describe('Spec Matching', function() {
 
-    it('should not match up Features and Tests into Specs via a Tag Matching (when tags do not match the pattern)', function(done) {
+    it('should not match up Features and Tests into Specs based on their Tags (when tags do not match the pattern)', function(done) {
 
         framework.match(__dirname, function(specs) {
 
