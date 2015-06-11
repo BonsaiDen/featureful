@@ -46,14 +46,15 @@ The following terminology will be used throughout the documentation:
 > Note: A explained above, a Spec can actually consist of multiple Feature and Tests files, as long as the all reference (match) to the same exact Feature.
 
 
-
 ## Command Line API
 
 **featureful** provides a generic binary for use in all environments.
 
 It can be installed by running:
 
-`npm -g install featureful`
+```
+npm -g install featureful
+```
 
 
 ### Validator
@@ -73,7 +74,9 @@ which can be used for custom tooling needs.
 
 ```
 $ featureful features/**/*.feature
+```
 
+```javascript
 [{
     "type": "FILE",
     "filename": "/test/parser/ast/features/valid/a.feature",
