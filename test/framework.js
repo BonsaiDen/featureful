@@ -29,7 +29,8 @@ global.framework = {
         };
 
         options.specs = {
-            matching: options.matching
+            matching: options.matching,
+            ignores: options.ignores
         };
 
         return new Parser(options);
@@ -81,7 +82,8 @@ global.framework = {
         options.specs = {
             matching: options.matching || {
                 type: 'path'
-            }
+            },
+            ignores: options.ignores
         };
 
         new Parser(options).matchSpecs().then(function(specs) {
