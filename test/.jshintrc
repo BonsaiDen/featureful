@@ -66,7 +66,7 @@
     // functions
     "funcscope"   : true, // if only function scope should be used for scope tests
     "onevar"      : false, // if only one var statement per function should be
-    "unused"      : "vars",
+    "unused"      : true,
     "validthis"   : true, // if 'this' inside a non-constructor function is valid this is a function scoped option only.
 
     // loops
