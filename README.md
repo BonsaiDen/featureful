@@ -196,25 +196,39 @@ the needs of your environment:
 
         - *String|Function* `method`: The method to use for matching
 
-         This can be either one of the builtin methods:
-         
-         * `title` *(the default)*: Will match Features and Tests based on their titles.
-         
-           This allows for multiple files per feature / test, but will **not** be able to nicely report typos in Feature / Test titles.
-         
-         * `path`: Will use the glob patterns defined for tests and features to match up the files.
-         
-           For example the patterns `feature/**/*.feature` and `test/**/*.test.js` would expect the file `feature/foo/bar/a.feature` to have its test implemented in `test/foo/bar/a.test.js` and the other way around.
+        > This can be either one of the builtin methods:
+        > 
+        > * `title` *(the default)*: Will match Features and Tests based on their titles.
+        > 
+        >   This allows for multiple files per feature / test, but will **not** be able to nicely report typos in Feature / Test titles.
+        > 
+        > * `path`: Will use the glob patterns defined for tests and features to match up the files.
+        > 
+        >   For example the patterns `feature/**/*.feature` and `test/**/*.test.js` would expect the file `feature/foo/bar/a.feature` to have its test implemented in `test/foo/bar/a.test.js` and the other way around.
      
-           This does **not** support multiple files per feature / test, but can report typos in Feature / Test titles and requires little setup except for the initial directory structure.
+        >   This does **not** support multiple files per feature / test, but can report typos in Feature / Test titles and requires little setup except for the initial directory structure.
      
-         * `tag`: Will match Features and Tests based on their Tag annotations.
+        > * `tag`: Will match Features and Tests based on their Tag annotations.
 
-         Or a custom function in the form of `String: matcher(Test/Feature, PathDescriptor, Options)`, please refer to `/test/specs/match/custom` for implementation details.
+        > Or a custom function in the form of `String: matcher(Test/Feature, PathDescriptor, Options)`, please refer to `/test/specs/match/custom` for implementation details.
         
         - *RegExp* `pattern`: A pattern for the built-in `tag` matching method.
         
         An example would be`/^spec\-(\d+)/`, where the capure group should be the unique identifier for the **Spec**.
+
+   - *Object* `ignores`: Configuration on how to ignore **Features**, **Tests** and **Scenarios** 
+
+        - *String|Function* `method`: The method to use for ignoring
+
+        > This can be either one of the builtin methods:
+
+        > * `tag`: Will ignores Features and Tests based on their Tag annotations.
+
+        > Or a custom function in the form of `String: matcher(Test/Feature/Scenario, PathDescriptor, Options)`, please refer to `/test/specs/ignore/custom` for implementation details.
+
+        - *RegExp* `pattern`: A pattern for the built-in `tag` matching method.
+
+        An example would be`/^(ignore|hide)$/` will ignore everything which has either a `ignore` or `hide` tag.
 
 ### Example of a featureful options object
 
