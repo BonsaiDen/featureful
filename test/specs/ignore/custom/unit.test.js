@@ -71,7 +71,7 @@ describe('Ignores', function() {
                 if (index === 0) {
 
                     // Should pass in a Feature instance
-                    object.type.should.be.exactly('FEATURE');
+                    object.toJSON().type.should.be.exactly('FEATURE');
 
                     // Should pass in a Path Descriptor
                     path.should.be.eql({
@@ -85,7 +85,7 @@ describe('Ignores', function() {
                 } else if (index === 1) {
 
                     // Should pass in a Scenario instance
-                    object.type.should.be.exactly('SCENARIO');
+                    object.toJSON().type.should.be.exactly('SCENARIO');
 
                     // Should pass in a Location Descriptor
                     path.should.be.eql({
@@ -99,7 +99,7 @@ describe('Ignores', function() {
                 } else if (index === 2) {
 
                     // Should pass in a Scenario instance
-                    object.type.should.be.exactly('SCENARIO');
+                    object.toJSON().type.should.be.exactly('SCENARIO');
 
                     // Should pass in a Location Descriptor
                     path.should.be.eql({
@@ -113,7 +113,7 @@ describe('Ignores', function() {
                 } else if (index === 3) {
 
                     // Should pass in a Feature instance
-                    object.type.should.be.exactly('FEATURE');
+                    object.toJSON().type.should.be.exactly('FEATURE');
 
                     // Should pass in a Path Descriptor
                     path.should.be.eql({

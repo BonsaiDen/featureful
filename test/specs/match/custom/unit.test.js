@@ -45,14 +45,13 @@ describe('Spec Matching', function() {
                 if (index === 0) {
 
                     // Should pass in a Feature instance
-                    object.should.be.eql({
+                    object.toJSON().should.be.eql({
                         type: 'FEATURE',
                         tags: [],
                         title: 'Feature A',
                         description: '',
                         scenarios: [],
-                        background: null,
-                        loc: {
+                        location: {
                             filename: root + '/test/specs/match/custom/features/a.feature',
                             line: 1,
                             col: 0
@@ -70,14 +69,13 @@ describe('Spec Matching', function() {
                 } else if (index === 1) {
 
                     // Should pass in a Feature instance
-                    object.should.be.eql({
+                    object.toJSON().should.be.eql({
                         type: 'FEATURE',
                         tags: [],
                         title: 'Feature B',
                         description: '',
                         scenarios: [],
-                        background: null,
-                        loc: {
+                        location: {
                             filename: root + '/test/specs/match/custom/features/b.feature',
                             line: 1,
                             col: 0

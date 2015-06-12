@@ -28,9 +28,6 @@ describe('Validation Error Formatting', function() {
             result.getFeature('A Feature').getScenario('Another Scenario Two').getCount().should.be.exactly(4);
             result.getFeature('A Feature').getScenario('The third Scenario').getCount().should.be.exactly(1);
 
-            // TODO Check Expectation Errors
-
-
             // Check formatted Error
             result.format().split(/\n/).should.be.eql([
                 "Feature: A Feature",
@@ -84,18 +81,18 @@ describe('Validation Error Formatting', function() {
                 "          in " + root + "/test/validator/format/features/a.feature (line 9, column 4)",
                 "",
                 "",
-                "        Expectation: When something",
+                "        Step: When something",
                 "",
-                "            - Missing code expression for Expectation in test:",
+                "            - Missing code expression for Step in test:",
                 "            ",
                 "                  \"When something\"",
                 "            ",
                 "              at " + root + "/test/validator/format/tests/a.test.js (line 17, column 8)",
                 "",
                 "",
-                "        Expectation: Then something",
+                "        Step: Then something",
                 "",
-                "            - Incorrect Expectation title in test:",
+                "            - Incorrect Step title in test:",
                 "            ",
                 "                  \"Then something else\"",
                 "            ",
@@ -135,11 +132,11 @@ describe('Validation Error Formatting', function() {
                 "          in " + root + "/test/validator/format/features/a.feature (line 15, column 4)",
                 "",
                 "",
-                "        Expectation: When something",
+                "        Step: When something",
                 "",
-                "            - Incorrect Expectation order in test:",
+                "            - Incorrect Step order in test:",
                 "            ",
-                "                  \"When something\" is currently implemented as expectation #2",
+                "                  \"When something\" is currently implemented as step #2",
                 "            ",
                 "              at " + root + "/test/validator/format/tests/a.test.js (line 33, column 8)",
                 "            ",
@@ -148,11 +145,11 @@ describe('Validation Error Formatting', function() {
                 "              in " + root + "/test/validator/format/features/a.feature (line 17, column 8)",
                 "",
                 "",
-                "        Expectation: Then something",
+                "        Step: Then something",
                 "",
-                "            - Incorrect Expectation order in test:",
+                "            - Incorrect Step order in test:",
                 "            ",
-                "                  \"Then something\" is currently implemented as expectation #1",
+                "                  \"Then something\" is currently implemented as step #1",
                 "            ",
                 "              at " + root + "/test/validator/format/tests/a.test.js (line 30, column 8)",
                 "            ",

@@ -4,16 +4,16 @@ describe('Scenario Parsing', function() {
 
         framework.match(__dirname, function(specs) {
 
-            var expectations = specs[0].getFeatures()[0].getScenarios()[0].getExpectations();
+            var steps = specs[0].getFeatures()[0].getScenarios()[0].getSteps();
 
-            // Check Expectations
-            expectations.length.should.be.exactly(1);
+            // Check Steps
+            steps.length.should.be.exactly(1);
 
-            // Check Expectation Title
-            expectations[0].getTitle().should.be.exactly('Given a doc string with the following value:');
+            // Check Step Title
+            steps[0].getTitle().should.be.exactly('Given a doc string with the following value:');
 
-            // Check Expectation doc string
-            expectations[0].getData().should.be.exactly('A doc string text.\n\nWith multiple lines.\n\nOf text.');
+            // Check Step doc string
+            steps[0].getData().should.be.exactly('A doc string text.\n\nWith multiple lines.\n\nOf text.');
 
         }, done);
 
