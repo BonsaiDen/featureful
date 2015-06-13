@@ -200,10 +200,22 @@ describe('AST Extraction', function() {
                 __dirname + '/features/valid/**/*.feature'
             ]);
 
+        files.should.be.eql(expectedFiles);
+
+    });
+
+    it('should ignore duplicate matches when extracting AST features from files via glob patterns', function() {
+
+        var Parser = require('../../..').Parser,
+            files = Parser.parseFeatureFromPatterns([
+                __dirname + '/features/valid/**/*.feature',
+                __dirname + '/features/valid/*.feature'
+            ]);
 
         files.should.be.eql(expectedFiles);
 
     });
+
 
     it('should provide a method for extracting the AST of features from files specified by a glob pattern (handling parsing errors)', function() {
 

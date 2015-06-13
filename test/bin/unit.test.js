@@ -19,9 +19,14 @@ describe('Binary', function() {
 
     });
 
-    it('should parse and print the AST of one or more Feature files when a glob patterns is passed as the argument', function(done) {
+    it('should parse and print the AST of one or more Feature files when a list of glob patterns is passed (ignoring any duplicate matches)', function(done) {
 
-        var child = exec(root + '/bin/featureful ' + root + '/test/bin/parser/features/**/*.feature', function(error, stdout, stderr) {
+        var child = exec(root + '/bin/featureful '
+                       + ' "' + root + '/test/bin/parser/features/**/*.feature"'
+                       + ' "' + root + '/test/bin/parser/features/*.feature"'
+                       + ' "' + root + '/test/bin/parser/features/test/*.feature"',
+
+                function(error, stdout, stderr) {
 
             stdout.should.be.exactly(
                 '['
@@ -54,6 +59,24 @@ describe('Binary', function() {
                 + '\n        "description": "",'
                 + '\n        "location": {'
                 + '\n          "filename": "' + root + '/test/bin/parser/features/foo/bar/b.feature",'
+                + '\n          "line": 1,'
+                + '\n          "col": 0'
+                + '\n        },'
+                + '\n        "scenarios": []'
+                + '\n      }'
+                + '\n    ]'
+                + '\n  },'
+                + '\n  {'
+                + '\n    "type": "FILE",'
+                + '\n    "filename": "' + root + '/test/bin/parser/features/other/c.feature",'
+                + '\n    "features": ['
+                + '\n      {'
+                + '\n        "type": "FEATURE",'
+                + '\n        "tags": [],'
+                + '\n        "title": "Feature C",'
+                + '\n        "description": "",'
+                + '\n        "location": {'
+                + '\n          "filename": "' + root + '/test/bin/parser/features/other/c.feature",'
                 + '\n          "line": 1,'
                 + '\n          "col": 0'
                 + '\n        },'
