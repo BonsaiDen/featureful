@@ -6,7 +6,14 @@ Feature: A Feature
         When something happens
         Then some action is performed
 
-        Examples:
+        Examples: A List of Examples
+
+        | title | value | other |
+        | foo   | 123   | cat   |
+        | bar   | 456   | dog   |
+
+
+        Examples: A List of additional Examples
 
         | title | value | other |
         | foo   | 123   | cat   |

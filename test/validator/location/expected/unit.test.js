@@ -29,12 +29,12 @@ describe('Feature Validation', function() {
                 actual: 'Feature A',
                 expected: 'should be implemented in matching test file.',
                 from: {
-                    col: 0,
+                    column: 0,
                     filename: root + '/test/validator/location/expected/features/foo/bar/a.feature',
                     line: 1
                 },
                 location: {
-                    col: -1,
+                    column: -1,
                     filename: root + '/test/validator/location/expected/tests/foo/bar/a.test.js',
                     line: -1,
                 },
@@ -46,12 +46,12 @@ describe('Feature Validation', function() {
                 actual: 'Feature B',
                 expected: 'should be specified in matching feature file.',
                 from: {
-                    col: 0,
+                    column: 0,
                     filename: root + '/test/validator/location/expected/tests/foo/bar/b.test.js',
                     line: 1
                 },
                 location: {
-                    col: -1,
+                    column: -1,
                     filename: root + '/test/validator/location/expected/features/foo/bar/b.feature',
                     line: -1,
                 },
@@ -63,12 +63,12 @@ describe('Feature Validation', function() {
                 actual: 'Feature C',
                 expected: 'should be implemented in matching test file.',
                 from: {
-                    col: 0,
+                    column: 0,
                     filename: root + '/test/validator/location/expected/features/c.feature',
                     line: 1
                 },
                 location: {
-                    col: -1,
+                    column: -1,
                     filename: root + '/test/validator/location/expected/tests/c.test.js',
                     line: -1,
                 },
@@ -80,12 +80,12 @@ describe('Feature Validation', function() {
                 actual: 'Feature D',
                 expected: 'should be specified in matching feature file.',
                 from: {
-                    col: 0,
+                    column: 0,
                     filename: root + '/test/validator/location/expected/tests/d.test.js',
                     line: 1
                 },
                 location: {
-                    col: -1,
+                    column: -1,
                     filename: root + '/test/validator/location/expected/features/d.feature',
                     line: -1,
                 },

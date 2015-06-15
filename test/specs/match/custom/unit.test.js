@@ -46,7 +46,7 @@ describe('Spec Matching', function() {
 
                     // Should pass in a Feature instance
                     object.toJSON().should.be.eql({
-                        type: 'FEATURE',
+                        type: 'Feature',
                         tags: [],
                         title: 'Feature A',
                         description: '',
@@ -54,7 +54,7 @@ describe('Spec Matching', function() {
                         location: {
                             filename: root + '/test/specs/match/custom/features/a.feature',
                             line: 1,
-                            col: 0
+                            column: 0
                         }
                     });
 
@@ -70,7 +70,7 @@ describe('Spec Matching', function() {
 
                     // Should pass in a Feature instance
                     object.toJSON().should.be.eql({
-                        type: 'FEATURE',
+                        type: 'Feature',
                         tags: [],
                         title: 'Feature B',
                         description: '',
@@ -78,7 +78,7 @@ describe('Spec Matching', function() {
                         location: {
                             filename: root + '/test/specs/match/custom/features/b.feature',
                             line: 1,
-                            col: 0
+                            column: 0
                         }
                     });
 

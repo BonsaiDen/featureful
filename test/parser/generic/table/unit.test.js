@@ -13,11 +13,13 @@ describe('Scenario Parsing', function() {
             steps[0].getTitle().should.be.exactly('Given the following table is parsed:');
 
             // Check Step data table
-            steps[0].getData().should.be.eql({
-                color: [ 'red', 'green', 'blue' ],
-                hex: [ '#ff0000', '#00ff00', '#0000ff' ],
-                index: [ '0', '1', '2' ]
-            });
+            steps[0].getArgument().getColumns().should.be.eql(['color', 'hex', 'index']);
+
+            steps[0].getArgument().getRows().should.be.eql([
+                ['red', '#ff0000', '0'],
+                ['green', '#00ff00', '1'],
+                ['blue', '#0000ff', '2']
+            ]);
 
         }, done);
 

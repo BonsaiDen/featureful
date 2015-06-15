@@ -36,12 +36,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/features/featureWithoutTestFile.feature',
                     line: 1,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/tests/featureWithoutTestFile.test.js',
                     line: -1,
-                    col: -1
+                    column: -1
                 }
             }]);
 
@@ -87,12 +87,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/tests/testWithoutFeatureFile.test.js',
                     line: 1,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/features/testWithoutFeatureFile.feature',
                     line: -1,
-                    col: -1
+                    column: -1
                 }
             }]);
 
@@ -138,12 +138,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/features/featureWithoutTest.feature',
                     line: 1,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/tests/featureWithoutTest.test.js',
                     line: -1,
-                    col: -1
+                    column: -1
                 }
             }]);
 
@@ -191,12 +191,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/tests/multiple/c.test.js',
                     line: 1,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/features/multiple/c.feature',
                     line: -1,
-                    col: -1
+                    column: -1
                 }
             }]);
 
@@ -221,12 +221,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/features/multiple/b.feature',
                     line: 1,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/tests/multiple/b.test.js',
                     line: -1,
-                    col: -1
+                    column: -1
                 }
             }]);
 
@@ -272,12 +272,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/tests/testWithoutFeature.test.js',
                     line: 1,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/features/testWithoutFeature.feature',
                     line: -1,
-                    col: -1
+                    column: -1
                 }
             }]);
 
@@ -323,12 +323,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/features/featureTestTitle.feature',
                     line: 2,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/tests/featureTestTitle.test.js',
                     line: 2,
-                    col: 0
+                    column: 0
                 }
             }]);
 
@@ -376,12 +376,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/features/featureTestDescription.feature',
                     line: 2,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/tests/featureTestDescription.test.js',
                     line: 2,
-                    col: 0
+                    column: 0
                 }
             }]);
 
@@ -441,12 +441,12 @@ describe('Feature Validation', function() {
                 from: {
                     filename: root + '/test/validator/feature/features/featureTestTags.feature',
                     line: 2,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/feature/tests/featureTestTags.test.js',
                     line: 2,
-                    col: 0
+                    column: 0
                 }
             }]);
 

@@ -1,9 +1,8 @@
 Feature: A Feature
-
+    
     @tagOne @tagTwo
-    Scenario: Scenario A
+    Scenario: A Scenario Description
 
-    Scenario: Scenario B
         A 
         Scenario 
         Description.

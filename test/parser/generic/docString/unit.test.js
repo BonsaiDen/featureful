@@ -13,7 +13,7 @@ describe('Scenario Parsing', function() {
             steps[0].getTitle().should.be.exactly('Given a doc string with the following value:');
 
             // Check Step doc string
-            steps[0].getData().should.be.exactly('A doc string text.\n\nWith multiple lines.\n\nOf text.');
+            steps[0].getArgument().getValue().should.be.exactly('A doc string text.\n\nWith multiple lines.\n\nOf text.');
 
         }, done);
 

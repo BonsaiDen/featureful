@@ -39,13 +39,14 @@ if (process.argv.length < 3) {
     // AST generation from feature files
     } else {
 
-        try {
-            var files = Parser.parseFeatureFromPatterns(process.argv.slice(2));
+        var files = Parser.parseFeatureFromPatterns(process.argv.slice(2));
+        if (files instanceof Error) {
+            process.stderr.write(files.toString() + '\n');
+            process.exit(1);
+            
+        } else {
             process.stdout.write(JSON.stringify(files, '', 2));
             
-        } catch(err) {
-            process.stderr.write(err.toString() + '\n');
-            process.exit(1);
         }
         
     }

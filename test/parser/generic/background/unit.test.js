@@ -5,7 +5,7 @@ describe('Feature Parsing', function() {
         var feature = framework.parseFeature(__dirname + '/features/a.feature');
 
         feature.should.be.instanceof(Object);
-        feature.toJSON().type.should.be.exactly('FILE');
+        feature.toJSON().type.should.be.exactly('File');
 
     });
 

@@ -7,6 +7,12 @@ describe('A Feature', function() {
 
     it('Scenario B', function() {
 
+        /*
+         A
+         Scenario
+         Description.
+         */
+
     });
 
 });

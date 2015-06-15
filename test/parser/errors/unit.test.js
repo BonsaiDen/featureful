@@ -9,12 +9,21 @@ describe('Parsing Errors', function() {
 
     });
 
+    it('should fail when example table data for Scenario Outlines is missing', function() {
+
+        var feature = framework.parseFeature(__dirname + '/features/missingExamples.feature');
+
+        feature.should.be.instanceof(Error);
+        feature.message.should.be.exactly('Parsing error on line 3, column 4: Expected at least one table of example data for scenario outline.');
+
+    });
+
     it('should fail when parsing empty example table data for Scenario Outlines', function() {
 
         var feature = framework.parseFeature(__dirname + '/features/invalidExamples.feature');
 
         feature.should.be.instanceof(Error);
-        feature.message.should.be.exactly('Parsing error on line 7, column 8: Expected at least one row of example data for scenario outline.');
+        feature.message.should.be.exactly('Parsing error on line 7, column 8: DataTable must have at least one row of data.');
 
     });
 
@@ -23,7 +32,7 @@ describe('Parsing Errors', function() {
         var feature = framework.parseFeature(__dirname + '/features/invalidStepTable.feature');
 
         feature.should.be.instanceof(Error);
-        feature.message.should.be.exactly('Parsing error on line 5, column 8: Expected at least one row of table data for step.');
+        feature.message.should.be.exactly('Parsing error on line 5, column 8: DataTable must have at least one row of data.');
 
     });
 

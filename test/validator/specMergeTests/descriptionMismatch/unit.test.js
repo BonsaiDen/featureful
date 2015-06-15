@@ -28,16 +28,16 @@ describe('Multi Validation', function() {
                 from: {
                     filename: root + '/test/validator/specMergeTests/descriptionMismatch/features/a.feature',
                     line: 2,
-                    col: 0
+                    column: 0
                 },
                 location: {
                     filename: root + '/test/validator/specMergeTests/descriptionMismatch/tests/a_2.test.js',
                     line: 2,
-                    col: 0
+                    column: 0
                 }
             }]);
 
-            // Check formatted Error Message
+            // TODO Check formatted Error Message
 
         }, done);
 

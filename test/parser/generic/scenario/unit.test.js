@@ -14,18 +14,21 @@ describe('Scenario Parsing', function() {
 
             featureScenarios[0].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 4,
+                column: 4,
                 line: 4
             });
 
             featureScenarios[1].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 4,
+                column: 4,
                 line: 6
             });
 
             featureScenarios[0].getTags().should.be.eql(['tagOne', 'tagTwo']);
             featureScenarios[1].getTags().should.be.eql([]);
+
+            featureScenarios[0].getDescription().should.be.exactly('');
+            featureScenarios[1].getDescription().should.be.exactly('A\nScenario\nDescription.');
 
             // Check Test Scenarios
             testScenarios.length.should.be.exactly(2);
@@ -34,13 +37,13 @@ describe('Scenario Parsing', function() {
 
             testScenarios[0].getLocation().should.be.eql({
                 filename: __dirname + '/tests/a.test.js',
-                col: 4,
+                column: 4,
                 line: 4
             });
 
             testScenarios[1].getLocation().should.be.eql({
                 filename: __dirname + '/tests/a.test.js',
-                col: 4,
+                column: 4,
                 line: 8
             });
 

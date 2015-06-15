@@ -27,7 +27,7 @@ describe('Feature Validation', function() {
                 actual: 'Feature A',
                 expected: 'should be implemented in matching test file.',
                 from: {
-                    col: 0,
+                    column: 0,
                     filename: root + '/test/validator/location/missing/features/foo/bar/a.feature',
                     line: 2
                 },
@@ -40,7 +40,7 @@ describe('Feature Validation', function() {
                 actual: 'Feature B',
                 expected: 'should be specified in matching feature file.',
                 from: {
-                    col: 0,
+                    column: 0,
                     filename: root + '/test/validator/location/missing/tests/b.test.js',
                     line: 2
                 },

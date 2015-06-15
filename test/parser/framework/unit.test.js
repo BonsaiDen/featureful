@@ -70,43 +70,44 @@ frameworks.forEach(function(f) {
             // Test Location
             test.getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             test.getLocation().line.should.be.of.type('number');
-            test.getLocation().col.should.be.of.type('number');
+            test.getLocation().column.should.be.of.type('number');
 
             // Scenario Location
             scenario.getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             scenario.getLocation().line.should.be.of.type('number');
-            scenario.getLocation().col.should.be.of.type('number');
+            scenario.getLocation().column.should.be.of.type('number');
 
             // Step Locations
             steps[0].getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             steps[0].getLocation().line.should.be.of.type('number');
-            steps[0].getLocation().col.should.be.of.type('number');
+            steps[0].getLocation().column.should.be.of.type('number');
 
             steps[1].getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             steps[1].getLocation().line.should.be.of.type('number');
-            steps[1].getLocation().col.should.be.of.type('number');
+            steps[1].getLocation().column.should.be.of.type('number');
 
             steps[2].getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             steps[2].getLocation().line.should.be.of.type('number');
-            steps[2].getLocation().col.should.be.of.type('number');
+            steps[2].getLocation().column.should.be.of.type('number');
 
             steps[3].getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             steps[3].getLocation().line.should.be.of.type('number');
-            steps[3].getLocation().col.should.be.of.type('number');
+            steps[3].getLocation().column.should.be.of.type('number');
 
             steps[4].getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             steps[4].getLocation().line.should.be.of.type('number');
-            steps[4].getLocation().col.should.be.of.type('number');
+            steps[4].getLocation().column.should.be.of.type('number');
 
             steps[5].getLocation().filename.should.be.exactly(root + '/test/parser/framework/' + name + '/base' + ext);
             steps[5].getLocation().line.should.be.of.type('number');
-            steps[5].getLocation().col.should.be.of.type('number');
+            steps[5].getLocation().column.should.be.of.type('number');
 
 
             // Descriptions ---------------------------------------------------
 
             // Test Description
             test.getDescription().should.be.exactly('A\nFeature\nDescription.');
+            scenario.getDescription().should.be.exactly('A\nScenario\nDescription.');
 
 
             // Tags -----------------------------------------------------------

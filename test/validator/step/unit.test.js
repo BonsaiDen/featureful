@@ -54,12 +54,12 @@ describe('Step Validation', function() {
                 from: {
                     filename: root + '/test/validator/step/features/stepWithoutTest.feature',
                     line: 4,
-                    col: 8
+                    column: 8
                 },
                 location: {
                     filename: root + '/test/validator/step/tests/stepWithoutTest.test.js',
                     line: 3,
-                    col: 4
+                    column: 4
                 }
             }]);
 
@@ -141,12 +141,12 @@ describe('Step Validation', function() {
                 from: {
                     filename: root + '/test/validator/step/tests/stepWithoutFeature.test.js',
                     line: 5,
-                    col: 8
+                    column: 8
                 },
                 location: {
                     filename: root + '/test/validator/step/features/stepWithoutFeature.feature',
                     line: 3,
-                    col: 4
+                    column: 4
                 }
             }]);
 
@@ -225,12 +225,12 @@ describe('Step Validation', function() {
                 from: {
                     filename: root + '/test/validator/step/features/stepTitle.feature',
                     line: 4,
-                    col: 8
+                    column: 8
                 },
                 location: {
                     filename: root + '/test/validator/step/tests/stepTitle.test.js',
                     line: 5,
-                    col: 8
+                    column: 8
                 }
             }]);
 
@@ -295,12 +295,12 @@ describe('Step Validation', function() {
                 from: {
                     filename: root + '/test/validator/step/features/missingCode.feature',
                     line: 4,
-                    col: 8
+                    column: 8
                 },
                 location: {
                     filename: root + '/test/validator/step/tests/missingCode.test.js',
                     line: 5,
-                    col: 8
+                    column: 8
                 }
             }]);
 
@@ -358,12 +358,12 @@ describe('Step Validation', function() {
                 from: {
                     filename: root + '/test/validator/step/features/stepIndex.feature',
                     line: 7,
-                    col: 12
+                    column: 12
                 },
                 location: {
                     filename: root + '/test/validator/step/tests/stepIndex.test.js',
                     line: 14,
-                    col: 8
+                    column: 8
                 }
             }]);
 
@@ -375,12 +375,12 @@ describe('Step Validation', function() {
                 from: {
                     filename: root + '/test/validator/step/features/stepIndex.feature',
                     line: 8,
-                    col: 12
+                    column: 12
                 },
                 location: {
                     filename: root + '/test/validator/step/tests/stepIndex.test.js',
                     line: 11,
-                    col: 8
+                    column: 8
                 }
             }]);
 

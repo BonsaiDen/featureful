@@ -10,19 +10,19 @@ describe('Scenario Parsing', function() {
             featureScenarios.length.should.be.exactly(2);
 
             // Check Feature Scenario Titles
-            featureScenarios[0].getTitle().should.be.exactly('Scenario Outline for title TA (TA, PA, CA, AA)');
-            featureScenarios[1].getTitle().should.be.exactly('Scenario Outline for title TB (TB, PB, CB, AB)');
+            featureScenarios[0].getTitle().should.be.exactly('Scenario Outline for title TA');
+            featureScenarios[1].getTitle().should.be.exactly('Scenario Outline for title TB');
 
             // Check Feature Scenario Locations
             featureScenarios[0].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 4,
+                column: 4,
                 line: 4
             });
 
             featureScenarios[1].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 4,
+                column: 4,
                 line: 4
             });
 
@@ -30,9 +30,13 @@ describe('Scenario Parsing', function() {
             featureScenarios[0].getTags().should.be.eql(['tagOne', 'tagTwo']);
             featureScenarios[1].getTags().should.be.eql(['tagOne', 'tagTwo']);
 
+            // Check Feature Scenario Descriptions
+            featureScenarios[0].getDescription().should.be.exactly('A\nScenario\nDescription.');
+            featureScenarios[1].getDescription().should.be.exactly('A\nScenario\nDescription.');
+
             // Check Features Scenario Steps
             featureScenarios[0].getSteps().length.should.be.exactly(3);
-            featureScenarios[0].getSteps().length.should.be.exactly(3);
+            featureScenarios[1].getSteps().length.should.be.exactly(3);
 
             // Check Features Scenario Expectation Titles
             featureScenarios[0].getSteps()[0].getTitle().should.be.exactly('Given the preset PA');
@@ -46,14 +50,14 @@ describe('Scenario Parsing', function() {
             // Check Feature Scenario Expectation Locations
             featureScenarios[0].getSteps()[0].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 8,
-                line: 6
+                column: 8,
+                line: 10
             });
 
             featureScenarios[1].getSteps()[0].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 8,
-                line: 6
+                column: 8,
+                line: 10
             });
 
         }, done);

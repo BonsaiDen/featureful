@@ -10,6 +10,12 @@ describe('A Feature', function() {
     // ### @scenarioTagOne @scenarioTagTwo
     it('A Scenario', function() {
 
+        /*
+         A
+         Scenario
+         Description.
+         */
+
         // ### Given some condition
         1 + 2;
 

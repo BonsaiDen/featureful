@@ -31,54 +31,54 @@ describe('Binary', function() {
             stdout.should.be.exactly(
                 '['
                 + '\n  {'
-                + '\n    "type": "FILE",'
+                + '\n    "type": "File",'
                 + '\n    "filename": "' + root + '/test/bin/parser/features/a.feature",'
                 + '\n    "features": ['
                 + '\n      {'
-                + '\n        "type": "FEATURE",'
+                + '\n        "type": "Feature",'
                 + '\n        "tags": [],'
                 + '\n        "title": "Feature A",'
                 + '\n        "description": "",'
                 + '\n        "location": {'
                 + '\n          "filename": "' + root + '/test/bin/parser/features/a.feature",'
                 + '\n          "line": 1,'
-                + '\n          "col": 0'
+                + '\n          "column": 0'
                 + '\n        },'
                 + '\n        "scenarios": []'
                 + '\n      }'
                 + '\n    ]'
                 + '\n  },'
                 + '\n  {'
-                + '\n    "type": "FILE",'
+                + '\n    "type": "File",'
                 + '\n    "filename": "' + root + '/test/bin/parser/features/foo/bar/b.feature",'
                 + '\n    "features": ['
                 + '\n      {'
-                + '\n        "type": "FEATURE",'
+                + '\n        "type": "Feature",'
                 + '\n        "tags": [],'
                 + '\n        "title": "Feature B",'
                 + '\n        "description": "",'
                 + '\n        "location": {'
                 + '\n          "filename": "' + root + '/test/bin/parser/features/foo/bar/b.feature",'
                 + '\n          "line": 1,'
-                + '\n          "col": 0'
+                + '\n          "column": 0'
                 + '\n        },'
                 + '\n        "scenarios": []'
                 + '\n      }'
                 + '\n    ]'
                 + '\n  },'
                 + '\n  {'
-                + '\n    "type": "FILE",'
+                + '\n    "type": "File",'
                 + '\n    "filename": "' + root + '/test/bin/parser/features/other/c.feature",'
                 + '\n    "features": ['
                 + '\n      {'
-                + '\n        "type": "FEATURE",'
+                + '\n        "type": "Feature",'
                 + '\n        "tags": [],'
                 + '\n        "title": "Feature C",'
                 + '\n        "description": "",'
                 + '\n        "location": {'
                 + '\n          "filename": "' + root + '/test/bin/parser/features/other/c.feature",'
                 + '\n          "line": 1,'
-                + '\n          "col": 0'
+                + '\n          "column": 0'
                 + '\n        },'
                 + '\n        "scenarios": []'
                 + '\n      }'
@@ -90,6 +90,24 @@ describe('Binary', function() {
             stderr.should.be.exactly('');
             should(error).be.exactly(null);
             child.exitCode.should.be.exactly(0);
+
+            done();
+
+        });
+
+    });
+
+    it('should print errors when parsing the AST of one or more Feature files', function(done) {
+
+        var child = exec(root + '/bin/featureful '
+                       + ' "' + root + '/test/bin/parser/error/**/*.feature"',
+
+                function(error, stdout, stderr) {
+
+            stdout.should.be.exactly('');
+            stderr.should.be.exactly('Error: Parsing error on line 4, column 8: Expected a Given / Then / When before "And" in scenario steps.\n');
+            should(error).not.be.exactly(null);
+            child.exitCode.should.be.exactly(1);
 
             done();
 

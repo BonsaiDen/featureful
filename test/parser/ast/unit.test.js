@@ -4,188 +4,180 @@ describe('AST Extraction', function() {
 
     var expectedFiles = [
         {
-            "type": "FILE",
+            "type": "File",
             "filename": root + "/test/parser/ast/features/valid/a.feature",
             "features": [
                 {
-                    "type": "FEATURE",
+                    "type": "Feature",
                     "tags": [
                         "tagOne",
                         "tagTwo"
                     ],
                     "title": "A Feature",
-                    "description": "A \ndescription \nof \nthe \nfeature.",
+                    "description": "A\ndescription\nof\nthe\nfeature.",
                     "location": {
                         "filename": root + "/test/parser/ast/features/valid/a.feature",
                         "line": 2,
-                        "col": 0
+                        "column": 0
                     },
                     "scenarios": [
                         {
-                            "type": "SCENARIO",
+                            "type": "Scenario",
                             "tags": [
                                 "tagOne",
                                 "tagTwo"
                             ],
                             "title": "A Scenario",
+                            "description": "A\nScenario\nDescription.",
                             "location": {
                                 "filename": root + "/test/parser/ast/features/valid/a.feature",
                                 "line": 11,
-                                "col": 4
+                                "column": 4
                             },
-                            "given": [
+                            "steps": [
                                 {
-                                    "type": "GIVEN",
+                                    "type": "Given",
                                     "title": "Given some condition",
-                                    "data": null,
+                                    "argument": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
-                                        "line": 12,
-                                        "col": 8
+                                        "line": 17,
+                                        "column": 8
                                     }
                                 },
                                 {
-                                    "type": "GIVEN",
+                                    "type": "Given",
                                     "title": "And given a doc string",
-                                    "data": "A doc string text.\n\nWith multiple lines.\n\nOf text.",
+                                    "argument": {
+                                        "type": "DocString",
+                                        "value": "A doc string text.\n\nWith multiple lines.\n\nOf text.",
+                                    },
                                     "location": {
-                                        "col": 12,
+                                        "column": 12,
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
-                                        "line": 13
+                                        "line": 18
                                     }
-                                }
-                            ],
-                            "when": [
+                                },
                                 {
-                                    "type": "WHEN",
+                                    "type": "When",
                                     "title": "When something happens",
-                                    "data": null,
+                                    "argument": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
-                                        "line": 22,
-                                        "col": 8
+                                        "line": 27,
+                                        "column": 8
                                     }
-                                }
-                            ],
-                            "then": [
+                                },
                                 {
-                                    "type": "THEN",
+                                    "type": "Then",
                                     "title": "Then some action is performed",
-                                    "data": null,
+                                    "argument": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
-                                        "line": 23,
-                                        "col": 8
+                                        "line": 28,
+                                        "column": 8
                                     },
                                 },
                                 {
-                                   "type": "THEN",
+                                   "type": "Then",
                                    "title": "And then a data table is parsed",
-                                    "data": {
-                                        "color": [
-                                            "red",
-                                            "green",
-                                            "blue",
-                                        ],
-                                        "hex": [
-                                            "#ff0000",
-                                            "#00ff00",
-                                            "#0000ff"
-                                        ],
-                                        "index": [
-                                            "0",
-                                            "1",
-                                            "2"
+                                    "argument": {
+                                        "type": "DataTable",
+                                        "columns": ["color", "hex", "index"],
+                                        "rows": [
+                                            ["red", "#ff0000", "0"],
+                                            ["green", "#00ff00", "1"],
+                                            ["blue", "#0000ff", "2"]
                                         ]
                                     },
                                     "location": {
-                                        "col": 12,
+                                        "column": 12,
                                         "filename": root + "/test/parser/ast/features/valid/a.feature",
-                                        "line": 24
+                                        "line": 29
                                     }
                                 }
                             ],
-                            "examples": null
+                            "examples": []
                         }
                     ]
                 }
             ]
         },
         {
-            "type": "FILE",
+            "type": "File",
             "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
             "features": [
                 {
-                    "type": "FEATURE",
+                    "type": "Feature",
                     "tags": [],
                     "title": "A Feature",
                     "description": "",
                     "location": {
                         "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                         "line": 1,
-                        "col": 0
+                        "column": 0
                     },
                     "scenarios": [
                         {
-                            "type": "SCENARIO",
+                            "type": "Scenario",
                             "tags": [
                                 "tagOne",
                                 "tagTwo"
                             ],
                             "title": "A Scenario Outline",
+                            "description": "",
                             "location": {
                                 "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                 "line": 4,
-                                "col": 4
+                                "column": 4
                             },
-                            "given": [
+                            "steps": [
                                 {
-                                    "type": "GIVEN",
+                                    "type": "Given",
                                     "title": "Given some condition",
-                                    "data": null,
+                                    "argument": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 5,
-                                        "col": 8
+                                        "column": 8
                                     }
-                                }
-                            ],
-                            "when": [
+                                },
                                 {
-                                    "type": "WHEN",
+                                    "type": "When",
                                     "title": "When something happens",
-                                    "data": null,
+                                    "argument": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 6,
-                                        "col": 8
+                                        "column": 8
                                     }
-                                }
-                            ],
-                            "then": [
+                                },
                                 {
-                                    "type": "THEN",
+                                    "type": "Then",
                                     "title": "Then some action is performed",
-                                    "data": null,
+                                    "argument": null,
                                     "location": {
                                         "filename": root + "/test/parser/ast/features/valid/foo/b.feature",
                                         "line": 7,
-                                        "col": 8
+                                        "column": 8
                                     }
                                 }
                             ],
-                            "examples": [
-                                {
-                                    "title": "foo",
-                                    "value": "123",
-                                    "other": "cat"
-                                },
-                                {
-                                    "title": "bar",
-                                    "value": "456",
-                                    "other": "dog"
-                                }
-                            ]
+                            "examples": [{
+                                "title": "A List of Examples",
+                                "columns": ["title", "value", "other"],
+                                "rows": [
+                                    ["foo", "123", "cat"],
+                                    ["bar", "456", "dog"]
+                                ]
+                            }, {
+                                "title": "A List of additional Examples",
+                                "columns": ["title", "value", "other"],
+                                "rows": [
+                                    ["foo", "123", "cat"],
+                                    ["bar", "456", "dog"]
+                                ]
+                            }]
                         }
                     ]
                 }
@@ -200,6 +192,7 @@ describe('AST Extraction', function() {
                 __dirname + '/features/valid/**/*.feature'
             ]);
 
+        console.log(files.stack);
         files.should.be.eql(expectedFiles);
 
     });

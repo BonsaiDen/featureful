@@ -29,13 +29,13 @@ describe('Step Parsing', function() {
             // Check Feature Step Locations
             featureSteps[0].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 8,
+                column: 8,
                 line: 5
             });
 
             featureSteps[1].getLocation().should.be.eql({
                 filename: __dirname + '/features/a.feature',
-                col: 12,
+                column: 12,
                 line: 6
             });
 
@@ -69,13 +69,13 @@ describe('Step Parsing', function() {
             // Check Test Step Locations
             testSteps[0].getLocation().should.be.eql({
                 filename: __dirname + '/tests/a.test.js',
-                col: 8,
+                column: 8,
                 line: 5
             });
 
             testSteps[1].getLocation().should.be.eql({
                 filename: __dirname + '/tests/a.test.js',
-                col: 8,
+                column: 8,
                 line: 8
             });
 

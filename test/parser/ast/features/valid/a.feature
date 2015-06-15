@@ -9,6 +9,11 @@ Feature: A Feature
 
     @tagOne @tagTwo
     Scenario: A Scenario
+
+        A
+        Scenario
+        Description.
+
         Given some condition
             And a doc string
                 """

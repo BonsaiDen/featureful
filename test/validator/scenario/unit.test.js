@@ -42,12 +42,12 @@ describe('Scenario Validation', function() {
                 from: {
                     filename: root + '/test/validator/scenario/features/scenarioWithoutTest.feature',
                     line: 3,
-                    col: 4
+                    column: 4
                 },
                 location: {
                     filename: root + '/test/validator/scenario/tests/scenarioWithoutTest.test.js',
                     line: 1,
-                    col: 0
+                    column: 0
                 }
             }]);
 
@@ -114,10 +114,10 @@ describe('Scenario Validation', function() {
                 from: {
                     filename: root + '/test/validator/scenario/tests/testWithoutScenario.test.js',
                     line: 3,
-                    col: 4
+                    column: 4
                 },
                 location: {
-                    col: 0,
+                    column: 0,
                     filename: root + '/test/validator/scenario/features/testWithoutScenario.feature',
                     line: 1
                 }
@@ -186,12 +186,12 @@ describe('Scenario Validation', function() {
                 from: {
                     filename: root + '/test/validator/scenario/features/scenarioTestTitle.feature',
                     line: 4,
-                    col: 4
+                    column: 4
                 },
                 location: {
                     filename: root + '/test/validator/scenario/tests/scenarioTestTitle.test.js',
                     line: 4,
-                    col: 4
+                    column: 4
                 }
             }]);
 
@@ -208,6 +208,74 @@ describe('Scenario Validation', function() {
                 "      \"A Scenario Title\"",
                 "",
                 "  in " + root + "/test/validator/scenario/features/scenarioTestTitle.feature (line 4, column 4)"
+            ]);
+
+        }, done);
+
+    });
+
+    it('should report mismatches between Scenario -> Test: Description', function(done) {
+
+        framework.validate(__dirname, 'scenarioTestDescription', function(result) {
+
+            // Check total error count
+            result.getCount().should.be.exactly(1);
+
+            // Check feature errors (only Features with errors should be reported)
+            result.getFeatures().should.be.eql(['A Feature']);
+
+            // There should be no generic Feature errors
+            result.getFeature('A Feature').getErrors().length.should.be.exactly(0);
+
+            // Check error count for Feature
+            result.getFeature('A Feature').getCount().should.be.exactly(1);
+
+            // Check scenario errors (only Scenarios with errors should be reported)
+            result.getFeature('A Feature').getScenarios().should.be.eql(['A Scenario Description']);
+
+            // Check actual error for Scenario
+            result.getFeature('A Feature').getScenario('A Scenario Description').getErrors().length.should.be.exactly(1);
+
+            // Check actual Error
+            result.getFeature('A Feature').getScenario('A Scenario Description').getErrors().should.be.eql([{
+                type: 'description',
+                message: 'Incorrect Scenario description in test:',
+                expected: 'A\nScenario\nDescription.',
+                actual: 'A\nScenario\nDescription\nmismatch.',
+                from: {
+                    filename: root + '/test/validator/scenario/features/scenarioTestDescription.feature',
+                    line: 4,
+                    column: 4
+                },
+                location: {
+                    filename: root + '/test/validator/scenario/tests/scenarioTestDescription.test.js',
+                    line: 4,
+                    column: 4
+                }
+            }]);
+
+            // Check formatted Error Message
+            result.getFeature('A Feature').getScenario('A Scenario Description').format().split(/\n/).should.be.eql([
+                "- Incorrect Scenario description in test:",
+                "",
+                "      \"",
+                "      A",
+                "      Scenario",
+                "      Description",
+                "      mismatch.",
+                "      \"",
+                "",
+                "  at " + root + "/test/validator/scenario/tests/scenarioTestDescription.test.js (line 4, column 4)",
+                "",
+                "  does not match the description from the feature file:",
+                "",
+                "      \"",
+                "      A",
+                "      Scenario",
+                "      Description.",
+                "      \"",
+                "",
+                "  in " + root + "/test/validator/scenario/features/scenarioTestDescription.feature (line 4, column 4)"
             ]);
 
         }, done);
@@ -245,12 +313,12 @@ describe('Scenario Validation', function() {
                 from: {
                     filename: root + '/test/validator/scenario/features/scenarioTestTags.feature',
                     line: 4,
-                    col: 4
+                    column: 4
                 },
                 location: {
                     filename: root + '/test/validator/scenario/tests/scenarioTestTags.test.js',
                     line: 4,
-                    col: 4
+                    column: 4
                 }
             }]);
 
