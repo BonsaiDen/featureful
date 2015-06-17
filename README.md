@@ -69,12 +69,12 @@ $ featureful test/config.js
 
 ### Reporter
 
-In order to enhance a existing Junit compatible XML test report with meta information
-from both Test and Feature files, pass its path as the second argument after 
-the configuration file.
+In order to enhance junit compatible XML reports with meta information
+from Test files one can pass a glob pattern that matches `xml` files as the 
+second argument.
 
 ```
-$ featureful test/config.js test/report/junit.xml
+$ featureful test/config.js test/report/**/*.xml
 ```
 
 
@@ -257,7 +257,7 @@ the needs of your environment:
     Tests and Features will be parsed and the specified XML file will be 
     rewritten with the previously retrieved tag information.
 
-    - *String* `path`: Path to the Junit compatible XML report of a test run.
+    - *String* `pattern`: A glob pattern matching all junit compatible XML reports.
 
 
 ### Example of a featureful options object
@@ -289,7 +289,7 @@ the needs of your environment:
         // If present, this will perform no validation but instead will parse
         // features and tests and update the specified junit.xml report
         // with meta information
-        path: '/tests/junit.xml'
+        path: '/tests/**/*.xml'
     }
 
 }
