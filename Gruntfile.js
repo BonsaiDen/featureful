@@ -12,9 +12,16 @@ module.exports = function(grunt) {
 
         // Environment --------------------------------------------------------
         env: {
+
             test: {
                 NO_COLOR: false
+            },
+
+            xml: {
+                JUNIT_REPORT_PATH: __dirname + '/test/reporter/junit.xml',
+                JUNIT_REPORT_NAME: 'featureful'
             }
+
         },
 
         // Tests --------------------------------------------------------------
@@ -30,6 +37,15 @@ module.exports = function(grunt) {
                     ]
                 },
                 src: ['test/**/unit.test.js']
+            },
+
+            xml: {
+                options: {
+                    reporter: 'mocha-jenkins-reporter',
+                    clearRequireCache: true,
+                    slow: 250
+                },
+                src: ['test/reporter/tests/*.test.js']
             }
 
         },
@@ -98,6 +114,7 @@ module.exports = function(grunt) {
     // Public Tasks -----------------------------------------------------------
     grunt.registerTask('test', ['env:test', 'mochaTest:test']);
     grunt.registerTask('coverage', ['env:test', 'mocha_istanbul:coverage']);
+    grunt.registerTask('deps', ['env:xml', 'mochaTest:xml']);
     grunt.registerTask('default', ['jshint']);
 
 };
