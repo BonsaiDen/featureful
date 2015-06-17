@@ -1,6 +1,6 @@
 {
   "name": "featureful",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Automatically verify your tests implementations against cucumber feature specs.",
   "keywords": [
     "cucumber",
@@ -49,6 +49,8 @@
     "grunt-mocha-test": "^0.12.7",
     "istanbul": "^0.3.14",
     "mocha": "^2.2.5",
-    "should": "^6.0.3"
+    "mocha-jenkins-reporter": "^0.1.8",
+    "should": "^6.0.3",
+    "xml2js": "^0.4.9"
   }
 }
