@@ -69,8 +69,13 @@ global.framework = {
     report: function(dir, callback, done, options) {
 
         framework.parse(dir, options).matchSpecs().then(function(specs) {
-            callback(specs);
-            done();
+            try {
+                callback(specs);
+                done();
+
+            } catch(err) {
+                done(err);
+            }
         });
 
     },

@@ -192,7 +192,6 @@ describe('AST Extraction', function() {
                 __dirname + '/features/valid/**/*.feature'
             ]);
 
-        console.log(files.stack);
         files.should.be.eql(expectedFiles);
 
     });

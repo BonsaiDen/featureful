@@ -176,7 +176,7 @@ describe('Binary', function() {
         var child = exec(
                 root + '/bin/featureful '
                 + root + '/test/bin/reporter/config.js '
-                + root + '/test/bin/reporter/junit.xml',
+                + root + '/test/bin/reporter/*.xml',
 
                 function(error, stdout, stderr) {
 

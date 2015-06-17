@@ -245,14 +245,14 @@ describe('Grunt', function() {
             },
 
             reporter: {
-                path: __dirname + '/reporter/junit.xml'
+                pattern: __dirname + '/reporter/*.xml'
             }
 
         }, function() {
 
             // Should log
             grunt.getLogs().should.be.eql([
-                'Rewriting existing Junit XML report...'
+                'Rewriting existing junit XML report...'
             ]);
 
             // Should not fail hard

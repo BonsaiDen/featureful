@@ -2,8 +2,7 @@
 
 // Dependencies ---------------------------------------------------------------
 // ----------------------------------------------------------------------------
-var fs = require('fs'),
-    Parser = require('../lib/spec/Parser'),
+var Parser = require('../lib/spec/Parser'),
     Validator = require('../lib/validator/Validator'),
     Reporter = require('../lib/reporter/Reporter');
 
@@ -23,15 +22,8 @@ module.exports = function(grunt) {
 
                 // Reporting
                 if (options.reporter) {
-
-                    grunt.log.ok('Rewriting existing Junit XML report...');
-
-                    var reporter = new Reporter(options);
-                    fs.writeFileSync(
-                        options.reporter.path,
-                        reporter.run(specs, options.reporter.path)
-                    );
-
+                    grunt.log.ok('Rewriting existing junit XML report...');
+                    Reporter.rewrite(specs, options.reporter.pattern);
                     done();
 
                 // Validation
