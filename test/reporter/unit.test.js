@@ -14,6 +14,7 @@ describe('Report', function() {
 
             } catch(err) {
                 fs.writeFileSync = originalWriteFileSync;
+                throw err;
             }
         };
 
@@ -65,7 +66,7 @@ describe('Report', function() {
         framework.report(__dirname, function(specs) {
 
             mockWriteFileSync(
-                __dirname + '/junit.xml', [
+                __dirname + '/tags.xml', [
                 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
                 '<testsuites name="featureful">',
                 '  <testsuite name="Feature A" tests="2" failures="0" skipped="0" timestamp="Tue, 16 Jun 2015 13:41:08 GMT" time="0.003">',
@@ -107,7 +108,7 @@ describe('Report', function() {
         framework.report(__dirname, function(specs) {
 
             mockWriteFileSync(
-                __dirname + '/junit.xml', [
+                __dirname + '/missing.xml', [
                 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
                 '<testsuites name="featureful">',
                 '  <testsuite name="Feature A" tests="2" failures="0" skipped="0" timestamp="Tue, 16 Jun 2015 13:41:08 GMT" time="0.003">',
@@ -124,6 +125,22 @@ describe('Report', function() {
             ]);
 
             Reporter.rewrite(specs, __dirname + '/missing.xml');
+
+        }, done);
+
+    });
+
+    it('should handle empty junit xml reports', function(done) {
+
+        framework.report(__dirname, function(specs) {
+
+            mockWriteFileSync(
+                __dirname + '/empty.xml', [
+                '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+                '<testsuites name="featureful"/>'
+            ]);
+
+            Reporter.rewrite(specs, __dirname + '/empty.xml');
 
         }, done);
 
