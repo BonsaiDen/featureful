@@ -2,9 +2,10 @@
 
 // Dependencies ---------------------------------------------------------------
 // ----------------------------------------------------------------------------
-var path = require('path'),
+var fs = require('fs'),
     Parser = require('../lib/spec/Parser'),
-    Validator = require('../lib/validator/Validator');
+    Validator = require('../lib/validator/Validator'),
+    Reporter = require('../lib/reporter/Reporter');
 
 
 // Command Line API -----------------------------------------------------------
@@ -23,12 +24,27 @@ if (process.argv.length < 3) {
 
         parser.matchSpecs().then(function(specs) {
 
-            var validator = new Validator(options),
-                error = validator.compare(specs);
+            // Reporting
+            if (process.argv.length >= 4 && process.argv[3].match(/\.xml$/)) {
 
-            if (error) {
-                process.stderr.write(error.format());
-                process.exit(1);
+                var reporter = new Reporter(options);
+
+                fs.writeFileSync(
+                    process.argv[3], 
+                    reporter.run(specs, process.argv[3])
+                );
+
+            // Validation
+            } else {
+
+                var validator = new Validator(options),
+                    error = validator.compare(specs);
+
+                if (error) {
+                    process.stderr.write(error.format());
+                    process.exit(1);
+                }
+
             }
 
         }, function(err) {

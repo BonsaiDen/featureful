@@ -2,8 +2,10 @@
 
 // Dependencies ---------------------------------------------------------------
 // ----------------------------------------------------------------------------
-var Parser = require('../lib/spec/Parser'),
-    Validator = require('../lib/validator/Validator');
+var fs = require('fs'),
+    Parser = require('../lib/spec/Parser'),
+    Validator = require('../lib/validator/Validator'),
+    Reporter = require('../lib/reporter/Reporter');
 
 
 // Grunt Tasks Definition -----------------------------------------------------
@@ -19,18 +21,36 @@ module.exports = function(grunt) {
             var parser = new Parser(options);
             parser.matchSpecs().then(function(specs) {
 
-                grunt.log.ok('Comparing Test and Features...');
+                // Reporting
+                if (options.reporter) {
 
-                var validator = new Validator(options),
-                    error = validator.compare(specs);
+                    grunt.log.ok('Rewriting existing Junit XML report...');
 
-                if (error) {
-                    grunt.log.writeln('\n' + error.format() + '\n');
-                    done(new Error('Tests and Features do not match!'));
+                    var reporter = new Reporter(options);
+                    fs.writeFileSync(
+                        options.reporter.path,
+                        reporter.run(specs, options.reporter.path)
+                    );
 
-                } else {
-                    grunt.log.ok('Tests and Features are up to date.');
                     done();
+
+                // Validation
+                } else {
+
+                    grunt.log.ok('Comparing Test and Features...');
+
+                    var validator = new Validator(options),
+                        error = validator.compare(specs);
+
+                    if (error) {
+                        grunt.log.writeln('\n' + error.format() + '\n');
+                        done(new Error('Tests and Features do not match!'));
+
+                    } else {
+                        grunt.log.ok('Tests and Features are up to date.');
+                        done();
+                    }
+
                 }
 
             });

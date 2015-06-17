@@ -1,0 +1,11 @@
+<testsuites name="featureful">
+<testsuite name="Feature A" tests="2" failures="0" skipped="0" timestamp="Tue, 16 Jun 2015 13:41:08 GMT" time="0.003">
+<testcase classname="Feature A" name="Scenario 3" time="0"/>
+<testcase classname="Feature A" name="Scenario 4" time="0"/>
+</testsuite>
+<testsuite name="Feature C" tests="2" failures="0" skipped="0" timestamp="Tue, 16 Jun 2015 13:41:08 GMT" time="0.001">
+<testcase classname="Feature C" name="Scenario 1" time="0"/>
+<testcase classname="Feature C" name="Scenario 2" time="0.001"/>
+</testsuite>
+</testsuites>
+

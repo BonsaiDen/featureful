@@ -66,6 +66,15 @@ global.framework = {
 
     },
 
+    report: function(dir, callback, done, options) {
+
+        framework.parse(dir, options).matchSpecs().then(function(specs) {
+            callback(specs);
+            done();
+        });
+
+    },
+
     validate: function(dir, id, callback, done, options) {
 
         options = options || {};
