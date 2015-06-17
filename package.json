@@ -1,6 +1,6 @@
 {
   "name": "featureful",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Automatically verify your tests implementations against cucumber feature specs.",
   "keywords": [
     "cucumber",
