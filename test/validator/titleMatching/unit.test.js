@@ -291,5 +291,33 @@ describe('Title Matching', function() {
 
     });
 
+    it('should match long titles with only a few different words by stripping their common prefixes before comparing', function() {
+
+        match([
+            'A user requires a navigation bar to be present on all interfaces (Marketingplan)',
+            'A user requires a navigation bar to be present on all interfaces (Image Database)'
+
+        ], [
+            'A user requires a navigation bar to be present on the "Image Database" interface',
+            'A user requires a navigation bar to be present on the "Marketingplan" interface'
+
+
+        ], 20).should.be.eql({
+            matching: [
+                [
+                    'A user requires a navigation bar to be present on all interfaces (Marketingplan)',
+                    'A user requires a navigation bar to be present on the "Marketingplan" interface'
+                ],
+                [
+                    'A user requires a navigation bar to be present on all interfaces (Image Database)',
+                    'A user requires a navigation bar to be present on the "Image Database" interface'
+                ]
+            ],
+            missingA: [],
+            missingB: []
+        });
+
+    });
+
 });
 
