@@ -317,14 +317,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
-- Login: email / password -> token / user info
-    - Dazu die moeglichkeit mit bereits vorhandendem token ebenfalls die user info zu holen 
-
-- Logout: token invalidieren (ist das im aktuell setting notwendig?)
-
-- Passwort zurücksetzen
-    - Route zum anfordern: email -> Reset Token / Link via Mail bekommen
-    - Route zum prüfen ob Reset Token gültig ist
-    - Route zum zurücksetzen: password / token -> Bestaetigung
-
