@@ -67,6 +67,17 @@ $ featureful test/config.js
 ```
 
 
+### Reporter
+
+In order to enhance a existing Junit compatible XML test report with meta information
+from both Test and Feature files, pass its path as the second argument after 
+the configuration file.
+
+```
+$ featureful test/config.js test/report/junit.xml
+```
+
+
 ### Feature File Parser
 
 The binary can also be used for parsing `.feature` files into a JSON based AST 
@@ -76,72 +87,82 @@ which can be used for custom tooling needs.
 $ featureful features/**/*.feature
 ```
 
-```javascript
+
+### AST Structure
+
+__Files__
+
+```
 [{
-    "type": "FILE",
+    "type": "File"
     "filename": "/test/parser/ast/features/valid/a.feature",
-    "features": [{
-        "type": "FEATURE",
-        "tags": [
-            "tagOne",
-            "tagTwo"
-        ],
-        "title": "A Feature",
-        "description": "A \ndescription \nof \nthe \nfeature.",
-        "location": {
-            "filename": "/test/parser/ast/features/valid/a.feature",
-            "line": 2,
-            "col": 0
-        },
-        "scenarios": [{
-            "type": "SCENARIO",
-            "tags": [
-                "tagOne",
-                "tagTwo"
-            ],
-            "title": "A Scenario",
-            "location": {
-                "filename": "/test/parser/ast/features/valid/a.feature",
-                "line": 11,
-                "col": 4
-            },
-            "given": [{
-                "type": "GIVEN",
-                "title": "Given some condition",
-                "location": {
-                    "filename": "/test/parser/ast/features/valid/a.feature",
-                    "line": 12,
-                    "col": 8
-                }
-            }],
-            "when": [{
-                "type": "WHEN",
-                "title": "When something happens",
-                "location": {
-                    "filename": "/test/parser/ast/features/valid/a.feature",
-                    "line": 13,
-                    "col": 8
-                }
-            }],
-            "then": [{
-                "type": "THEN",
-                "title": "Then some action is performed",
-                "location": {
-                    "filename": "/test/parser/ast/features/valid/a.feature",
-                    "line": 14,
-                    "col": 8
-                }
-            }],
-            "examples": null
-        }]
-    }]
-}, {
-    "type": "FILE",
-    "filename": "/test/parser/ast/features/valid/foo/b.feature",
-    "features": [
-    ]
+    "features": Features
+
+}, ...]
+```
+
+__Features__
+
+```
+[{
+    "type": "Feature",
+    "tags": [
+        "tagOne",
+        "tagTwo"
+    ],
+    "title": "A Feature",
+    "description": "A\ndescription\nof\nthe \nfeature.",
+    "location": {
+        "filename": "/test/parser/ast/features/valid/a.feature",
+        "line": 2,
+        "col": 0
+    },
+    "scenarios": Scenarios
+    
+}, ...]
+```
+
+__Scenarios__
+
+```
+[{
+    "type": "Scenario",
+    "tags": [
+        "tagOne",
+        "tagTwo"
+    ],
+    "title": "A Scenario",
+    "location": {
+        "filename": "/test/parser/ast/features/valid/a.feature",
+        "line": 11,
+        "col": 4
+    },
+    "steps": Steps,
+    "examples": Examples
+
+}, ...]
+```
+
+__Steps__
+
+```
+[{
+    "type": "Given|When|Then",
+    "title": "Given|When|THen something happens",
+    "argument": Argument
+    "location": {
+        "filename": "/test/parser/ast/features/valid/a.feature",
+        "line": 13,
+        "col": 8
+    }
 }]
 ```
+
+__Examples__
+
+
+__Arguments__
+
 
 ## Grunt Task
 
@@ -230,6 +251,15 @@ the needs of your environment:
 
         An example would be`/^(ignore|hide)$/` will ignore everything which has either a `ignore` or `hide` tag.
 
+- *Object* `reporter`: Configurations for XML report rewriting
+
+    If this property is present **NO** validation will be performed, instead
+    Tests and Features will be parsed and the specified XML file will be 
+    rewritten with the previously retrieved tag information.
+
+    - *String* `path`: Path to the Junit compatible XML report of a test run.
+
+
 ### Example of a featureful options object
 
 ```javascript
@@ -253,6 +283,13 @@ the needs of your environment:
         // We want our Features and Tests to be combined 
         // into Specs based on their paths
         matching: 'path'
+    },
+
+    reporter: {
+        // If present, this will perform no validation but instead will parse
+        // features and tests and update the specified junit.xml report
+        // with meta information
+        path: '/tests/junit.xml'
     }
 
 }
@@ -280,4 +317,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+- Login: email / password -> token / user info
+    - Dazu die moeglichkeit mit bereits vorhandendem token ebenfalls die user info zu holen 
+
+- Logout: token invalidieren (ist das im aktuell setting notwendig?)
+
+- Passwort zurücksetzen
+    - Route zum anfordern: email -> Reset Token / Link via Mail bekommen
+    - Route zum prüfen ob Reset Token gültig ist
+    - Route zum zurücksetzen: password / token -> Bestaetigung
 
