@@ -6,7 +6,6 @@ var Parser = require('../lib/spec/Parser'),
     Validator = require('../lib/validator/Validator'),
     Reporter = require('../lib/reporter/Reporter');
 
-
 // Command Line API -----------------------------------------------------------
 // ----------------------------------------------------------------------------
 if (process.argv.length < 3) {
@@ -55,7 +54,6 @@ if (process.argv.length < 3) {
             
         } else {
             process.stdout.write(JSON.stringify(files, '', 2));
-            
         }
         
     }

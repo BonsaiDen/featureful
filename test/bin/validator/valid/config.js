@@ -10,7 +10,9 @@ module.exports = {
     },
 
     specs: {
-        matching: 'path'
+        matching: {
+            type: 'path'
+        }
     }
 
 };
