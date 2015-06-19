@@ -469,5 +469,168 @@ describe('Feature Validation', function() {
 
     });
 
+    it('should report duplicates Feature / Test titles when matching via tags', function(done) {
+
+        framework.validate(__dirname, 'duplicate/*', function(result) {
+
+            // Check total error count
+            result.getCount().should.be.exactly(2);
+
+            // Check feature errors (only Features with errors should be reported)
+            result.getFeatures().should.be.eql(['A Feature']);
+
+            // Check actual error for Feature
+            result.getFeature('A Feature').getErrors().length.should.be.exactly(2);
+
+            // There should be no Scenario errors
+            result.getFeature('A Feature').getScenarios().should.be.eql([]);
+
+            // Check actual Errors
+            result.getFeature('A Feature').getErrors().should.be.eql([{
+                type: 'missing',
+                message: 'Duplicated Feature title:',
+                expected: 'a Feature with the same title is already specified in another Spec.',
+                actual: 'A Feature',
+                from: {
+                    filename: root + '/test/validator/feature/features/duplicate/b.feature',
+                    line: 2,
+                    column: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/features/duplicate/a.feature',
+                    line: 2,
+                    column: 0
+                }
+
+            }, {
+                type: 'missing',
+                message: 'Duplicated Test title:',
+                expected: 'a Test with the same title is already implemented in another Spec.',
+                actual: 'A Feature',
+                from: {
+                    filename: root + '/test/validator/feature/tests/duplicate/b.test.js',
+                    line: 2,
+                    column: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/tests/duplicate/a.test.js',
+                    line: 2,
+                    column: 0
+                }
+            }]);
+
+            // Check formatted Error Message
+            result.getFeature('A Feature').format().split(/\n/).should.be.eql([
+                "- Duplicated Feature title:",
+                "",
+                "      \"A Feature\"",
+                "",
+                "  at " + root + "/test/validator/feature/features/duplicate/b.feature (line 2, column 0)",
+                "",
+                "  a Feature with the same title is already specified in another Spec.",
+                "",
+                "  in " + root + "/test/validator/feature/features/duplicate/a.feature (line 2, column 0)",
+                "",
+                "- Duplicated Test title:",
+                "",
+                "      \"A Feature\"",
+                "",
+                "  at " + root + "/test/validator/feature/tests/duplicate/b.test.js (line 2, column 0)",
+                "",
+                "  a Test with the same title is already implemented in another Spec.",
+                "",
+                "  in " + root + "/test/validator/feature/tests/duplicate/a.test.js (line 2, column 0)"
+            ]);
+
+        }, done, {
+            matching: {
+                type: 'tag',
+                pattern: /feature\-([\d]+)/
+            }
+        });
+
+    });
+
+    it('should report duplicates Feature / Test titles when matching via path', function(done) {
+
+        framework.validate(__dirname, 'duplicate/*', function(result) {
+
+            // Check total error count
+            result.getCount().should.be.exactly(2);
+
+            // Check feature errors (only Features with errors should be reported)
+            result.getFeatures().should.be.eql(['A Feature']);
+
+            // Check actual error for Feature
+            result.getFeature('A Feature').getErrors().length.should.be.exactly(2);
+
+            // There should be no Scenario errors
+            result.getFeature('A Feature').getScenarios().should.be.eql([]);
+
+            // Check actual Errors
+            result.getFeature('A Feature').getErrors().should.be.eql([{
+                type: 'missing',
+                message: 'Duplicated Feature title:',
+                expected: 'a Feature with the same title is already specified in another Spec.',
+                actual: 'A Feature',
+                from: {
+                    filename: root + '/test/validator/feature/features/duplicate/b.feature',
+                    line: 2,
+                    column: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/features/duplicate/a.feature',
+                    line: 2,
+                    column: 0
+                }
+
+            }, {
+                type: 'missing',
+                message: 'Duplicated Test title:',
+                expected: 'a Test with the same title is already implemented in another Spec.',
+                actual: 'A Feature',
+                from: {
+                    filename: root + '/test/validator/feature/tests/duplicate/b.test.js',
+                    line: 2,
+                    column: 0
+                },
+                location: {
+                    filename: root + '/test/validator/feature/tests/duplicate/a.test.js',
+                    line: 2,
+                    column: 0
+                }
+            }]);
+
+            // Check formatted Error Message
+            result.getFeature('A Feature').format().split(/\n/).should.be.eql([
+                "- Duplicated Feature title:",
+                "",
+                "      \"A Feature\"",
+                "",
+                "  at " + root + "/test/validator/feature/features/duplicate/b.feature (line 2, column 0)",
+                "",
+                "  a Feature with the same title is already specified in another Spec.",
+                "",
+                "  in " + root + "/test/validator/feature/features/duplicate/a.feature (line 2, column 0)",
+                "",
+                "- Duplicated Test title:",
+                "",
+                "      \"A Feature\"",
+                "",
+                "  at " + root + "/test/validator/feature/tests/duplicate/b.test.js (line 2, column 0)",
+                "",
+                "  a Test with the same title is already implemented in another Spec.",
+                "",
+                "  in " + root + "/test/validator/feature/tests/duplicate/a.test.js (line 2, column 0)"
+            ]);
+
+        }, done, {
+            matching: {
+                type: 'path'
+            }
+        });
+
+    });
+
 });
 
