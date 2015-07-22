@@ -295,15 +295,25 @@ describe('Title Matching', function() {
 
         match([
             'A user requires a navigation bar to be present on all interfaces (Marketingplan)',
-            'A user requires a navigation bar to be present on all interfaces (Image Database)'
+            'A user requires a navigation bar to be present on all interfaces (Image Database)',
+            'Then a error message about the expired/invalid recovery link is displayed',
+            'A common prefix which is still different enough to count as its own title',
+            'Yet another title which is not present on the other side of things'
 
         ], [
             'A user requires a navigation bar to be present on the "Image Database" interface',
-            'A user requires a navigation bar to be present on the "Marketingplan" interface'
+            'A user requires a navigation bar to be present on the "Marketingplan" interface',
+            'Then a error message about the service outage is displayed',
+            'A common prefix that was not different enough to count as yet another title',
+            'Yet another title that was missing and spelled differently on the initial side of things'
 
 
         ], 20).should.be.eql({
             matching: [
+                [
+                    'A common prefix which is still different enough to count as its own title',
+                    'A common prefix that was not different enough to count as yet another title',
+                ],
                 [
                     'A user requires a navigation bar to be present on all interfaces (Marketingplan)',
                     'A user requires a navigation bar to be present on the "Marketingplan" interface'
@@ -311,10 +321,18 @@ describe('Title Matching', function() {
                 [
                     'A user requires a navigation bar to be present on all interfaces (Image Database)',
                     'A user requires a navigation bar to be present on the "Image Database" interface'
+                ],
+                [
+                    'Then a error message about the expired/invalid recovery link is displayed',
+                    'Then a error message about the service outage is displayed'
                 ]
             ],
-            missingA: [],
-            missingB: []
+            missingA: [
+                'Yet another title that was missing and spelled differently on the initial side of things'
+            ],
+            missingB: [
+                'Yet another title which is not present on the other side of things'
+            ]
         });
 
     });
