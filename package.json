@@ -1,6 +1,6 @@
 {
   "name": "featureful",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Automatically verify your tests implementations against cucumber feature specs.",
   "keywords": [
     "cucumber",
@@ -38,7 +38,8 @@
     "diff": "^1.4.0",
     "gherkin": "^2.12.2",
     "glob": "^5.0.5",
-    "recast": "^0.10.12"
+    "recast": "^0.10.12",
+    "xml2js": "^0.4.9"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
@@ -50,7 +51,6 @@
     "istanbul": "^0.3.14",
     "mocha": "^2.2.5",
     "mocha-jenkins-reporter": "^0.1.8",
-    "should": "^6.0.3",
-    "xml2js": "^0.4.9"
+    "should": "^6.0.3"
   }
 }
