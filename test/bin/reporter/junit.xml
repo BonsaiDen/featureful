@@ -2,26 +2,26 @@
 <testsuites name="featureful">
   <testsuite name="Feature A" tests="2" failures="0" skipped="0" timestamp="Tue, 16 Jun 2015 13:41:08 GMT" time="0.003">
     <testcase classname="Feature A" name="Scenario 1" time="0">
-      <tag value="featureAScenario1TagOne"/>
-      <tag value="featureAScenario1TagTwo"/>
+      <tag value="@featureAScenario1TagOne"/>
+      <tag value="@featureAScenario1TagTwo"/>
     </testcase>
     <testcase classname="Feature A" name="Scenario 2" time="0">
-      <tag value="featureAScenario2TagOne"/>
-      <tag value="featureAScenario2TagTwo"/>
+      <tag value="@featureAScenario2TagOne"/>
+      <tag value="@featureAScenario2TagTwo"/>
     </testcase>
-    <tag value="featureATagOne"/>
-    <tag value="featureATagTwo"/>
+    <tag value="@featureATagOne"/>
+    <tag value="@featureATagTwo"/>
   </testsuite>
   <testsuite name="Feature B" tests="2" failures="0" skipped="0" timestamp="Tue, 16 Jun 2015 13:41:08 GMT" time="0.001">
     <testcase classname="Feature B" name="Scenario 1" time="0">
-      <tag value="featureBScenario1TagOne"/>
-      <tag value="featureBScenario1TagTwo"/>
+      <tag value="@featureBScenario1TagOne"/>
+      <tag value="@featureBScenario1TagTwo"/>
     </testcase>
     <testcase classname="Feature B" name="Scenario 2" time="0.001">
-      <tag value="featureBScenario2TagOne"/>
-      <tag value="featureBScenario2TagTwo"/>
+      <tag value="@featureBScenario2TagOne"/>
+      <tag value="@featureBScenario2TagTwo"/>
     </testcase>
-    <tag value="featureBTagOne"/>
-    <tag value="featureBTagTwo"/>
+    <tag value="@featureBTagOne"/>
+    <tag value="@featureBTagTwo"/>
   </testsuite>
 </testsuites>
